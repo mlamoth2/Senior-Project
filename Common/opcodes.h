@@ -45,15 +45,13 @@ namespace MSP430_Opcodes
 		template <typename T> 
 		T* getOpcodeInformation(uint16_t address)
 		{
-			return <reinterpret_cast><T*>(address);
+			return reinterpret_cast<T*>(address);
 		}
 
 
 	}MSP430_Opcode;
 
-	// Finish this later
-
-	char* Mnemonics[] = 
+	const char* Mnemonics[] = 
 	{
 		// Single Operand Arithmetic
 
@@ -63,10 +61,33 @@ namespace MSP430_Opcodes
 		{"SXT"},
 		{"PUSH"},
 		{"CALL"},
-		{"RETI"}
+		{"RETI"},
+
 
 		// Conditionals
+		{"JNE"},
+		{"JEQ"},
+		{"JNC"},
+		{"JC"},
+		{"JN"},
+		{"JGE"},
+		{"JL"},
+		{"JMP"},
 
+		// Two Operand Arithmetic
+
+		{"MOV"},
+		{"ADD"},
+		{"ADDC"},
+		{"SUBC"},
+		{"SUB"},
+		{"CMP"},
+		{"DADD"},
+		{"BIT"},
+		{"BIC"},
+		{"BIS"},
+		{"XOR"},
+		{"AND"},
 	};
 
 	enum Opcodes
@@ -122,7 +143,7 @@ namespace MSP430_Opcodes
 		JL,
 
 		// JMP: Jump unconditionally
-		jmp,
+		JMP,
 
 		//
 		// Two Operand Arithmetic
@@ -164,39 +185,68 @@ namespace MSP430_Opcodes
 		// AND: Bitwise AND; dst &= src
 		AND
 
-		/*
-			Emulated instructions:
+		
+
+	};
+
+	/*
+		Emulated instructions:
 			
-			These instructions are meant for the assembler, not the disassembler/debugger.
-			If we want to recognize them in the disassembler/debugger, then
-			we simply define certain MSP430 instruction patterns as idioms and replace the output as necessary
-			while preserving the physical diassembly
+		These instructions are meant for the assembler, not the disassembler/debugger.
+		If we want to recognize them in the disassembler/debugger, then
+		we simply define certain MSP430 instruction patterns as idioms and replace the output as necessary
+		while preserving the physical diassembly
+	*/
 
-		
-			ADC.x dst ADDC.x #0,dst add carry to destination
-			CLRC BIC #1,SR clear carry bit 0xc312
-			CLRN BIC #4,SR clear negative bit 0xc222
-			CLRZ BIC #2,SR clear zero bit 0xc322
-			DADC.x dst DADD.x #0,dst decimal add carry to destination
-			DEC.x dst SUB.x #1,dst decrement
-			DECD.x dst SUB.x #2,dst double decrement
-			DINT BIC #8,SR disable interrupts 0xc232
-			EINT BIS #8,SR enable interrupts 0xd232
-			INC.x dst ADD.x #1,dst increment
-			INCD.x dst ADD.x #2,dst double increment
-			INV.x dst XOR.x #−1,dst invert
-			NOP MOV #0,R3 no operation 0x4303
-			POP dst MOV @SP+,dst pop from stack
-			RET MOV @SP+,PC return from subroutine 0x4130
-			RLA.x dst ADD.x dst,dst rotate left arithmetic (shift left 1 bit)
-			RLC.x dst ADDC.x dst,dst rotate left through carry
-			SBC.x dst SUBC.x #0,dst subtract borrow (1−carry) from destination
-			SETC BIS #1,SR set carry bit 0xd312
-			SETN BIS #4,SR set negative bit 0xd222
-			SETZ BIS #2,SR set zero bit 0xd322
-			TST.x dst CMP.x #0,dst test destination
-		
-		*/
+	enum OpcodesEmulated
+	{
+		ADC = 27, // arbitrary(?)
 
+		CLRC,
+
+		CLRN,
+
+		CLRZ,
+
+		DADC,
+
+		DEC,
+
+		DECD,
+
+		DINT,
+
+		EINT,
+
+		INC,
+
+		INCD,
+
+		INV,
+
+		NOP,
+
+		POP,
+
+		RET,
+
+		RLA,
+
+		RLC,
+
+		SBC,
+
+		SETC,
+
+		SETN,
+
+		SETZ,
+
+		TST
+	};
+
+	const char* MnemonicsEmulated[] = 
+	{
+		{""},
 	};
 };
