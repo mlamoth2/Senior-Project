@@ -11,7 +11,7 @@ namespace MSP430_Opcodes
 		{"RRA", "", "Rotate right arithmetic"},
 		{"SXT", "", "Sign extend byte to word"},
 		{"PUSH", "", "Push value onto stack"},
-		{"CALL", "", "ubroutine call, push PC onto stack, then move source to PC"},
+		{"CALL", "", "Subroutine call, push PC onto stack, then move source to PC"},
 		{"RETI", "", "Return from interrupt, pop SR, then pop PC"},
 
 
