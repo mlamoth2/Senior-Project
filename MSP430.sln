@@ -22,9 +22,16 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Operating System", "Operating System\Operating System.vcxproj", "{F53D686C-E458-4C7B-89F4-F63F90411C29}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{E7524A7F-1A7F-4373-8189-FD4741147B37}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source Files", "Source Files", "{88DAFFF9-E045-4AF8-B786-E06483D648C7}"
 	ProjectSection(SolutionItems) = preProject
-		Common\opcodes.h = Common\opcodes.h
-		Common\typedefs.h = Common\typedefs.h
+		Common\opcodes.cpp = Common\opcodes.cpp
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Header Files", "Header Files", "{4D99582A-F228-468D-8DBB-9CAC5E1BF8B8}"
+	ProjectSection(SolutionItems) = preProject
+		Common\opcodes.hpp = Common\opcodes.hpp
+		Common\typedefs.hpp = Common\typedefs.hpp
 	EndProjectSection
 EndProject
 Global
@@ -110,6 +117,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{88DAFFF9-E045-4AF8-B786-E06483D648C7} = {E7524A7F-1A7F-4373-8189-FD4741147B37}
+		{4D99582A-F228-468D-8DBB-9CAC5E1BF8B8} = {E7524A7F-1A7F-4373-8189-FD4741147B37}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8A8A4EEE-9053-4F7C-8B6C-E5ADD5500DFB}

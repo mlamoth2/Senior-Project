@@ -2,9 +2,9 @@
 
 namespace MSP430_Opcodes
 {
-	#define SINGLE_OPERAND 0
+	#define SINGLE_OPERAND_ARITHMETIC 0
 	#define CONDITIONAL 1
-	#define TWO_BYTE_OPERAND 2
+	#define TWO_OPERAND_ARITHMETIC 2
 	#define EMULATED 3
 
 	// define bit fields for the struct
@@ -22,7 +22,7 @@ namespace MSP430_Opcodes
 	{
 		char unused : 3;
 		char condition : 3; 
-		char offset : 10; // 10 bit signed offset -1024 to 1023
+		short offset : 10; // 10 bit signed offset -1024 to 1023
 	}MSP430_Conditional;
 
 	typedef struct
@@ -43,53 +43,29 @@ namespace MSP430_Opcodes
 		// could used lambda?
 
 		template <typename T> 
-		T* getOpcodeInformation(uint16_t address)
+		T* getOpcodeInformation()
 		{
 			return reinterpret_cast<T*>(address);
 		}
 
+		void setAddress(uint16 address)
+		{
+			this->address = address;
+		}
 
+		uint16 getAddress()
+		{
+			return address;
+		}
 	}MSP430_Opcode;
 
-	const char* Mnemonics[] = 
+	typedef struct
 	{
-		// Single Operand Arithmetic
-
-		{"RRC"},
-		{"SWPB"},
-		{"RRA"},
-		{"SXT"},
-		{"PUSH"},
-		{"CALL"},
-		{"RETI"},
-
-
-		// Conditionals
-		{"JNE"},
-		{"JEQ"},
-		{"JNC"},
-		{"JC"},
-		{"JN"},
-		{"JGE"},
-		{"JL"},
-		{"JMP"},
-
-		// Two Operand Arithmetic
-
-		{"MOV"},
-		{"ADD"},
-		{"ADDC"},
-		{"SUBC"},
-		{"SUB"},
-		{"CMP"},
-		{"DADD"},
-		{"BIT"},
-		{"BIC"},
-		{"BIS"},
-		{"XOR"},
-		{"AND"},
-	};
-
+		const char* mnemonic;
+		const char* altMnemonic;
+		const char* description;
+	}MnemonicsAndDescriptions;
+		
 	enum Opcodes
 	{
 		//
@@ -111,35 +87,39 @@ namespace MSP430_Opcodes
 		// PUSH: Push value onto stack
 		PUSH,
 
-		// CALL: Subroutine call, push pc onto stack, then move source to pc
+		// CALL: Subroutine call, push PC onto stack, then move source to PC
 		CALL,
 
-		// RETI: Return from interrupt, pop sr, then pop pc
+		// RETI: Return from interrupt, pop SR, then pop PC
 		RETI,
 
 		//
 		// Conditionals
 		//
 
-		// JNZ/JNE: Jump if not equal or jump if not zero
+		// JNZ/JNE: Jump if not equal/zero
 		JNZ,
+		JNE = 7,
 
-		// JEQ/JZ: Jump if equal or jump if zero
+		// JEQ/JZ: Jump if equal/zero
 		JEQ,
+		JZ = 8,
 
-		// JNC/JLO: Jump if not carry or jump if lower
+		// JNC/JLO: Jump if not carry/lower
 		JNC,
+		JLO = 9,
 
-		// JC/JHS: Jump if carry or jump if higher or same
+		// JC/JHS: Jump if carry/higher or same
 		JC,
+		JHS = 10,
 
 		// JN: Jump if negative
 		JN,
 
-		// JGE: Jump if greater than or equal(N == V)
+		// JGE: Jump if greater than or equal
 		JGE,
 
-		// JL: Jump if less than (N != V)
+		// JL: Jump if less than
 		JL,
 
 		// JMP: Jump unconditionally
@@ -155,19 +135,19 @@ namespace MSP430_Opcodes
 		// ADD: Add source to destination
 		ADD,
 
-		// ADDC: Add w/carry: dst += (src+C) 
+		// ADDC: Add source and carry to destination
 		ADDC,
 
-		// SUBC: Subtract w/ carry: dst -= (src+C)
+		// SUBC: Subtract source from destination (with carry)
 		SUBC,
 
-		// SUB: Subtract; dst -= src
+		// SUB: Subtract source from destination; dst -= src
 		SUB,
 
 		// CMP: Compare; (dst-src); discard result
 		CMP,
 
-		// DADD: Decimal (BCD) addition: dst += src
+		// DADD: Decimal add source to destination (with carry)
 		DADD,
 
 		// BIT: Test bits; (dst & src); discard result
@@ -176,7 +156,7 @@ namespace MSP430_Opcodes
 		// BIC: Bit clear; dest &= ~src
 		BIC,
 
-		// BIS: "Bit set" - logical OR; dst |= src
+		// BIS: Bit set - logical OR
 		BIS,
 
 		// XOR: Bitwise XOR; dst ^= src
@@ -184,9 +164,6 @@ namespace MSP430_Opcodes
 
 		// AND: Bitwise AND; dst &= src
 		AND
-
-		
-
 	};
 
 	/*
@@ -200,7 +177,11 @@ namespace MSP430_Opcodes
 
 	enum OpcodesEmulated
 	{
+		// ADC: Add carry to destination
 		ADC = 27, // arbitrary(?)
+
+		// BR: 	Branch to destination
+		BR,
 
 		CLRC,
 
@@ -243,10 +224,5 @@ namespace MSP430_Opcodes
 		SETZ,
 
 		TST
-	};
-
-	const char* MnemonicsEmulated[] = 
-	{
-		{""},
 	};
 };

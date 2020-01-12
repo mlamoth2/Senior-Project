@@ -1,17 +1,14 @@
-#include "..\Common\typedefs.h"
-#include "..\Common\opcodes.h"
+#include "..\Common\typedefs.hpp"
+#include "..\Common\opcodes.hpp"
 
 using namespace MSP430_Opcodes; // this has to be above the include below, otherwise compile error
 
-#include "decoder.h"
+#include "decoder.hpp"
 
 namespace Decoder
 {
 	MSP430Decoder::MSP430Decoder(uint16 intialProgramCounter)
 	{
-		// todo:
-		// check if PC is 2 byte aligned and within executable region
-
 		programCounter = intialProgramCounter;
 	}
 
@@ -22,23 +19,19 @@ namespace Decoder
 	// todo: add some sort of garbage collection
 	MSP430_Opcode* MSP430Decoder::decodeCurrentInstruction()
 	{
-		int type;
-
 		MSP430_Opcode* opcode = nullptr;
 
 		uint16* currentInstruction = (uint16*)programCounter;
 
 		opcode = new MSP430_Opcode;
 
-		type = *currentInstruction >> 13;
-
 		opcode->address = programCounter;
 
-		switch (type)
+		switch (*currentInstruction >> 13)
 		{
 			case 0: // single operand arithmetic 
 			{
-				opcode->type = SINGLE_OPERAND;
+				opcode->type = SINGLE_OPERAND_ARITHMETIC;
 			}
 			break;
 
@@ -50,7 +43,7 @@ namespace Decoder
 
 			default: // two operand arithmetic
 			{
-				opcode->type = TWO_BYTE_OPERAND;
+				opcode->type = TWO_OPERAND_ARITHMETIC;
 			}
 			break;
 		}
