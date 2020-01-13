@@ -13,6 +13,5 @@ namespace Decoder
 
 	private:
 
-		uint16 programCounter;
 	};
 }

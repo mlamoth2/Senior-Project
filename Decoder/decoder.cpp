@@ -7,9 +7,8 @@ using namespace MSP430_Opcodes; // this has to be above the include below, other
 
 namespace Decoder
 {
-	MSP430Decoder::MSP430Decoder(uint16 intialProgramCounter)
+	MSP430Decoder::MSP430Decoder()
 	{
-		programCounter = intialProgramCounter;
 	}
 
 	MSP430Decoder::~MSP430Decoder()
