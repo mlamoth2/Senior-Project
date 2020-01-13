@@ -17,7 +17,7 @@ namespace Decoder
 	}
 
 	// todo: add some sort of garbage collection
-	MSP430_Opcode* MSP430Decoder::decodeCurrentInstruction()
+	MSP430_Opcode* MSP430Decoder::decodeCurrentInstruction(uint16 programCounter)
 	{
 		MSP430_Opcode* opcode = nullptr;
 
