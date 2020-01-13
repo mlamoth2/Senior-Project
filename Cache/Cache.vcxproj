@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{93FE343B-1C89-47AE-8742-413ED4AAFC0C}</ProjectGuid>
-    <RootNamespace>Fetch</RootNamespace>
+    <ProjectGuid>{CB0465E6-1568-44A7-BD98-58F380E6F055}</ProjectGuid>
+    <RootNamespace>Cache</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -115,10 +115,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="fetch.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="fetch.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -13,15 +13,23 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="decoder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="decoder.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <Filter Include="Source Files\L1">
+      <UniqueIdentifier>{0ee08e13-8367-4b79-81a5-ea11fa603475}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\L2">
+      <UniqueIdentifier>{6e451811-3d51-4085-a240-dbabeb0ee377}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\L3">
+      <UniqueIdentifier>{fc03be7c-5b65-4e5f-825e-59bae59e526b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\L1">
+      <UniqueIdentifier>{cfb11957-b480-437a-aece-60dfca99daa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\L2">
+      <UniqueIdentifier>{28dce82d-cb0b-465f-8df5-a61f9314291a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\L3">
+      <UniqueIdentifier>{a0b78c5c-1d2c-48a4-b4c8-fccdcc53674b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
