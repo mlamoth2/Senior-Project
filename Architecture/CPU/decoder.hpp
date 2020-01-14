@@ -2,12 +2,12 @@
 
 namespace Decoder
 {
-	class MSP430Decoder
+	class MSP430CPUDecoder
 	{
 	public:
 
-		MSP430Decoder();
-		~MSP430Decoder();
+		MSP430CPUDecoder();
+		~MSP430CPUDecoder();
 
 		MSP430_Opcode* decodeCurrentInstruction(uint16 programCounter);
 

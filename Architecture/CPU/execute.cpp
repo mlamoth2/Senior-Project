@@ -3,13 +3,13 @@
 
 #include "executer.hpp"
 
-namespace Executer
+namespace CPUExecute
 {
-	MSP430Executer::MSP430Executer()
+	MSP430CPUExecuter::MSP430CPUExecuter()
 	{
 
 	}
-	MSP430Executer::~MSP430Executer()
+	MSP430CPUExecuter::~MSP430CPUExecuter()
 	{
 
 	}

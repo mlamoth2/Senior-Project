@@ -7,16 +7,16 @@ using namespace MSP430_Opcodes; // this has to be above the include below, other
 
 namespace Decoder
 {
-	MSP430Decoder::MSP430Decoder()
+	MSP430CPUDecoder::MSP430CPUDecoder()
 	{
 	}
 
-	MSP430Decoder::~MSP430Decoder()
+	MSP430CPUDecoder::~MSP430CPUDecoder()
 	{
 	}
 
 	// todo: add some sort of garbage collection
-	MSP430_Opcode* MSP430Decoder::decodeCurrentInstruction(uint16 programCounter)
+	MSP430_Opcode* MSP430CPUDecoder::decodeCurrentInstruction(uint16 programCounter)
 	{
 		MSP430_Opcode* opcode = nullptr;
 

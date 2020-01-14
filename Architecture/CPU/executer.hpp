@@ -1,13 +1,13 @@
 #pragma once
 
-namespace Executer
+namespace Execute
 {
-	class MSP430Executer
+	class MSP430CPUExecute
 	{
 	public:
 
-		MSP430Executer();
-		~MSP430Executer();
+		MSP430CPUExecute();
+		~MSP430CPUExecute();
 
 	private:
 
