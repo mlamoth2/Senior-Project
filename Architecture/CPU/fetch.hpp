@@ -2,12 +2,12 @@
 
 namespace Fetcher
 {
-	class MSP430Fetch
+	class MSP430Fetcher
 	{
 	public:
 
-		MSP430Fetch(uint16 programCounter);
-		~MSP430Fetch();
+		MSP430Fetcher(uint16 programCounter);
+		~MSP430Fetcher();
 
 		void advanceProgramCounter()
 		{

@@ -13,5 +13,81 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\CPU">
+      <UniqueIdentifier>{739859e3-e873-4a41-9739-1a475a0a7fa9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CPU\ALU">
+      <UniqueIdentifier>{348ebeb9-a78b-4dff-88ae-a6d7667f78bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CPU\Branch Predictor">
+      <UniqueIdentifier>{781cd4f2-bb88-48ff-b28d-18286f97e968}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CPU\Cache">
+      <UniqueIdentifier>{8899bb1a-04da-4233-ad32-802388daa5d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CPU\Decoder">
+      <UniqueIdentifier>{02d28cee-63c3-49b2-8e77-ba68cd470829}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CPU\Fetch">
+      <UniqueIdentifier>{91161a49-5b72-4368-8611-7a93e9b99f22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CPU\Pipeline">
+      <UniqueIdentifier>{40b62f06-9947-4561-aa94-3199fc6ccae1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CPU">
+      <UniqueIdentifier>{5e3c58f8-4fb3-4c33-8540-0204fcac9b13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CPU\ALU">
+      <UniqueIdentifier>{ad0ef2f9-5573-49ba-9f8f-36b4169ba943}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CPU\Branch Predictor">
+      <UniqueIdentifier>{a9ebcd32-9cf3-45c6-8521-128c5b6f1bea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CPU\Cache">
+      <UniqueIdentifier>{d85bd0bc-214b-4e98-8623-31438a4fb3d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CPU\Decoder">
+      <UniqueIdentifier>{b341f246-e4d9-4986-9ff7-e7d4bc77bd6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CPU\Fetch">
+      <UniqueIdentifier>{70ab500d-e46e-41e7-b3c3-a12ce8e787a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CPU\Pipeline">
+      <UniqueIdentifier>{81aa7b03-5932-4534-8cce-bee98d39034a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CPU\Executer">
+      <UniqueIdentifier>{c9a460ce-2175-4a82-8012-6caba74f3f2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CPU\Executer">
+      <UniqueIdentifier>{d61bf19b-e509-4a93-b7f3-57d34640d38a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CPU\branchpredictor.cpp">
+      <Filter>Source Files\CPU\Branch Predictor</Filter>
+    </ClCompile>
+    <ClCompile Include="CPU\decoder.cpp">
+      <Filter>Source Files\CPU\Decoder</Filter>
+    </ClCompile>
+    <ClCompile Include="CPU\executer.cpp">
+      <Filter>Source Files\CPU\Executer</Filter>
+    </ClCompile>
+    <ClCompile Include="CPU\fetch.cpp">
+      <Filter>Source Files\CPU\Fetch</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CPU\fetch.hpp">
+      <Filter>Header Files\CPU\Fetch</Filter>
+    </ClInclude>
+    <ClInclude Include="CPU\executer.hpp">
+      <Filter>Header Files\CPU\Executer</Filter>
+    </ClInclude>
+    <ClInclude Include="CPU\decoder.hpp">
+      <Filter>Header Files\CPU\Decoder</Filter>
+    </ClInclude>
+    <ClInclude Include="CPU\branchpredictor.hpp">
+      <Filter>Header Files\CPU\Branch Predictor</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

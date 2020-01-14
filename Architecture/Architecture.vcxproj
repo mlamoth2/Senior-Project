@@ -18,6 +18,18 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CPU\branchpredictor.cpp" />
+    <ClCompile Include="CPU\decoder.cpp" />
+    <ClCompile Include="CPU\executer.cpp" />
+    <ClCompile Include="CPU\fetch.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CPU\branchpredictor.hpp" />
+    <ClInclude Include="CPU\decoder.hpp" />
+    <ClInclude Include="CPU\executer.hpp" />
+    <ClInclude Include="CPU\fetch.hpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{9C494346-D69E-4DD0-95FC-0A0634E9BA86}</ProjectGuid>
