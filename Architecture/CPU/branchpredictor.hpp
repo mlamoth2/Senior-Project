@@ -16,7 +16,7 @@ namespace BranchPredictor
 		MSP430CPUBranchPredictor();
 		~MSP430CPUBranchPredictor();
 
-		void Increment()
+		void incrementState()
 		{
 			if (state < STRONGLY_NOT_TAKEN)
 			{
@@ -25,7 +25,7 @@ namespace BranchPredictor
 
 		}
 
-		void Decrement()
+		void decrementState()
 		{
 			if (state != STRONGLY_NOT_TAKEN)
 			{

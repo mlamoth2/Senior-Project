@@ -55,11 +55,17 @@
     <Filter Include="Header Files\CPU\Pipeline">
       <UniqueIdentifier>{81aa7b03-5932-4534-8cce-bee98d39034a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\CPU\Executer">
+    <Filter Include="Header Files\CPU\Execute">
+      <UniqueIdentifier>{d61bf19b-e509-4a93-b7f3-57d34640d38a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CPU\Execute">
       <UniqueIdentifier>{c9a460ce-2175-4a82-8012-6caba74f3f2b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\CPU\Executer">
-      <UniqueIdentifier>{d61bf19b-e509-4a93-b7f3-57d34640d38a}</UniqueIdentifier>
+    <Filter Include="Source Files\CPU\Registers">
+      <UniqueIdentifier>{a1b068af-0409-4ac6-b5b0-9e4bfe01f46b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CPU\Registers">
+      <UniqueIdentifier>{e5514703-38f3-4016-b614-39be7894f40e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -69,11 +75,14 @@
     <ClCompile Include="CPU\decoder.cpp">
       <Filter>Source Files\CPU\Decoder</Filter>
     </ClCompile>
-    <ClCompile Include="CPU\executer.cpp">
-      <Filter>Source Files\CPU\Executer</Filter>
-    </ClCompile>
     <ClCompile Include="CPU\fetch.cpp">
       <Filter>Source Files\CPU\Fetch</Filter>
+    </ClCompile>
+    <ClCompile Include="CPU\execute.cpp">
+      <Filter>Source Files\CPU\Execute</Filter>
+    </ClCompile>
+    <ClCompile Include="CPU\alu_instructions.cpp">
+      <Filter>Source Files\CPU\ALU</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -81,13 +90,16 @@
       <Filter>Header Files\CPU\Fetch</Filter>
     </ClInclude>
     <ClInclude Include="CPU\executer.hpp">
-      <Filter>Header Files\CPU\Executer</Filter>
+      <Filter>Header Files\CPU\Execute</Filter>
     </ClInclude>
     <ClInclude Include="CPU\decoder.hpp">
       <Filter>Header Files\CPU\Decoder</Filter>
     </ClInclude>
     <ClInclude Include="CPU\branchpredictor.hpp">
       <Filter>Header Files\CPU\Branch Predictor</Filter>
+    </ClInclude>
+    <ClInclude Include="CPU\alu_instructions.hpp">
+      <Filter>Header Files\CPU\ALU</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

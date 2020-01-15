@@ -19,12 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CPU\alu_instructions.cpp" />
     <ClCompile Include="CPU\branchpredictor.cpp" />
     <ClCompile Include="CPU\decoder.cpp" />
-    <ClCompile Include="CPU\executer.cpp" />
+    <ClCompile Include="CPU\execute.cpp" />
     <ClCompile Include="CPU\fetch.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CPU\alu_instructions.hpp" />
     <ClInclude Include="CPU\branchpredictor.hpp" />
     <ClInclude Include="CPU\decoder.hpp" />
     <ClInclude Include="CPU\executer.hpp" />
