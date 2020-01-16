@@ -89,9 +89,6 @@
     <ClInclude Include="CPU\fetch.hpp">
       <Filter>Header Files\CPU\Fetch</Filter>
     </ClInclude>
-    <ClInclude Include="CPU\executer.hpp">
-      <Filter>Header Files\CPU\Execute</Filter>
-    </ClInclude>
     <ClInclude Include="CPU\decoder.hpp">
       <Filter>Header Files\CPU\Decoder</Filter>
     </ClInclude>
@@ -100,6 +97,9 @@
     </ClInclude>
     <ClInclude Include="CPU\alu_instructions.hpp">
       <Filter>Header Files\CPU\ALU</Filter>
+    </ClInclude>
+    <ClInclude Include="CPU\execute.hpp">
+      <Filter>Header Files\CPU\Execute</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -18,24 +18,10 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="CPU\alu_instructions.cpp" />
-    <ClCompile Include="CPU\branchpredictor.cpp" />
-    <ClCompile Include="CPU\decoder.cpp" />
-    <ClCompile Include="CPU\execute.cpp" />
-    <ClCompile Include="CPU\fetch.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="CPU\alu_instructions.hpp" />
-    <ClInclude Include="CPU\branchpredictor.hpp" />
-    <ClInclude Include="CPU\decoder.hpp" />
-    <ClInclude Include="CPU\execute.hpp" />
-    <ClInclude Include="CPU\fetch.hpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{9C494346-D69E-4DD0-95FC-0A0634E9BA86}</ProjectGuid>
-    <RootNamespace>Architecture</RootNamespace>
+    <ProjectGuid>{191C7733-6E45-4FC7-AB3A-CCCE6722F9B8}</ProjectGuid>
+    <RootNamespace>Assembler</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -84,7 +70,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
@@ -92,7 +78,7 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
@@ -128,6 +114,8 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
