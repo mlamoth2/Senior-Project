@@ -29,8 +29,11 @@ namespace Fetcher
 			return programCounter;
 		}
 
+		void fetchCacheLine(uint8* cacheBuffer);
+
 	private:
 
 		uint16 programCounter;
+		uint8 cacheLine[CACHE_LINE_SIZE];
 	};
 }
