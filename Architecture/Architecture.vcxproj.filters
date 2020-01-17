@@ -81,8 +81,11 @@
     <ClCompile Include="CPU\execute.cpp">
       <Filter>Source Files\CPU\Execute</Filter>
     </ClCompile>
-    <ClCompile Include="CPU\alu_instructions.cpp">
+    <ClCompile Include="CPU\instructions.cpp">
       <Filter>Source Files\CPU\ALU</Filter>
+    </ClCompile>
+    <ClCompile Include="CPU\registers.cpp">
+      <Filter>Source Files\CPU\Registers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -95,11 +98,14 @@
     <ClInclude Include="CPU\branchpredictor.hpp">
       <Filter>Header Files\CPU\Branch Predictor</Filter>
     </ClInclude>
-    <ClInclude Include="CPU\alu_instructions.hpp">
-      <Filter>Header Files\CPU\ALU</Filter>
-    </ClInclude>
     <ClInclude Include="CPU\execute.hpp">
       <Filter>Header Files\CPU\Execute</Filter>
+    </ClInclude>
+    <ClInclude Include="CPU\instructions.hpp">
+      <Filter>Header Files\CPU\ALU</Filter>
+    </ClInclude>
+    <ClInclude Include="CPU\registers.hpp">
+      <Filter>Header Files\CPU\Registers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
