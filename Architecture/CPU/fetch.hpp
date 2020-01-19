@@ -8,15 +8,25 @@ namespace Fetcher
 
 		MSP430Fetcher(uint16 programCounter);
 		~MSP430Fetcher();
-
-		void advanceProgramCounter()
+		
+		bool consumeCacheLine(uint8 consumed)
 		{
-			this->programCounter += sizeof(uint16);
-		}
+			bool didConsumeCacheLine = true;
 
-		void retractProgramCounter()
-		{
-			this->programCounter -= sizeof(uint16);
+			if ((cacheLineLeft - consumed) < 0)
+			{
+				// fetch another cacheline
+
+				fetchCacheLine((uint8*)programCounter);
+
+				didConsumeCacheLine = false;
+			}
+			else
+			{
+				cacheLineLeft -= consumed;
+			}
+
+			return didConsumeCacheLine;
 		}
 
 		void setProgramCounter(uint16 newProgramCounter)
@@ -35,5 +45,6 @@ namespace Fetcher
 
 		uint16 programCounter;
 		uint8 cacheLine[CACHE_LINE_SIZE];
+		int16 cacheLineLeft;
 	};
 }
