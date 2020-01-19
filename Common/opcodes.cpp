@@ -1,3 +1,5 @@
+#include "defines.hpp"
+#include "typedefs.hpp"
 #include "opcodes.hpp"
 
 namespace MSP430_Opcodes
@@ -40,4 +42,9 @@ namespace MSP430_Opcodes
 		{"XOR", "", "Exclusive or source with destination"},
 		{"AND", "", "Logical AND source with destination"},
 	};
+
+	uint16 MSP430_Opcode::getLength()
+	{
+		return length;
+	}
 }

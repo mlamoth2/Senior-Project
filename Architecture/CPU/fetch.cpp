@@ -19,11 +19,4 @@ namespace Fetcher
 	{
 		
 	}
-
-	void MSP430Fetcher::fetchCacheLine(uint8* cacheBuffer)
-	{
-		std::memcpy(cacheLine, cacheBuffer, CACHE_LINE_SIZE);
-
-		cacheLineLeft = CACHE_LINE_SIZE;
-	}
 }

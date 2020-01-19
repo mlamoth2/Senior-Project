@@ -15,19 +15,17 @@ namespace Decoder
 	MSP430CPUDecoder::~MSP430CPUDecoder()
 	{
 	}
-
-
-
+	
 	uint8 MSP430CPUDecoder::decodeCurrentInstruction(uint16 programCounter, MSP430_Opcode* opcode)
 	{
-		bool hasImmediateSource = false, hasImmediateDestination = false;
+		bool hasSourceAddress = false, hasDestinationAddress = false, hasSourceImmediate = false;
 
 		uint8 length = 0;
 
 		uint16* currentProgramCounter = (uint16*)programCounter;
 		uint16* currentInstruction = currentProgramCounter;
 
-		opcode->address = programCounter;
+		opcode->setAddress(programCounter);
 
 		switch (*currentInstruction >> 13)
 		{
@@ -35,7 +33,7 @@ namespace Decoder
 			{
 				++currentProgramCounter;
 
-				opcode->instructionType = SINGLE_OPERAND_ARITHMETIC;
+				opcode->setInstructionType(SINGLE_OPERAND_ARITHMETIC);
 
 				const MSP40_Single_Operand_Arithmetic* singleOperandArithmetic = opcode->getOpcodeInformation<MSP40_Single_Operand_Arithmetic>();
 			
@@ -46,28 +44,32 @@ namespace Decoder
 																word following the instruction word,
 																where X = PC - ADDR*/
 				{
-					hasImmediateSource = true;
+					hasSourceAddress = true;
 				}
 				else if (singleOperandArithmetic->as == 1
 					&& singleOperandArithmetic->source == 2) /* Absolute mode &ADDR. SR takes value 0,
 																and works as ADDR(SR)
 																ADDR follows instruction word*/
 				{
-					hasImmediateSource = true;
+					hasSourceAddress = true;
 				}
 				else if (singleOperandArithmetic->as == 3
 					&& singleOperandArithmetic->source == 0) /* Immediate mode3 #N
 																N follows the instruction word*/
 				{
-					hasImmediateSource = true;
+					hasSourceImmediate = true;
 				}
 
-				if (hasImmediateSource)
+				if (hasSourceAddress)
 				{
-					opcode->sourceAddress = *currentProgramCounter;
+					opcode->setSourceAddress(*currentProgramCounter);
+				}
+				else if (hasSourceImmediate)
+				{
+					opcode->setImmediate(*currentProgramCounter);
 				}
 
-				opcode->operationType = singleOperandArithmetic->size;
+				opcode->setOperationType(singleOperandArithmetic->size);
 			}
 			break;
 
@@ -75,7 +77,7 @@ namespace Decoder
 			{
 				++currentProgramCounter;
 
-				opcode->instructionType = CONDITIONAL;
+				opcode->setInstructionType(CONDITIONAL);
 
 				const MSP430_Conditional* conditional = opcode->getOpcodeInformation<MSP430_Conditional>();
 
@@ -87,7 +89,7 @@ namespace Decoder
 			{
 				++currentProgramCounter;
 
-				opcode->instructionType = TWO_OPERAND_ARITHMETIC;
+				opcode->setInstructionType(TWO_OPERAND_ARITHMETIC);
 
 				const MSP430_Two_Operand_Arithmetic* twoOperandArithmetic = opcode->getOpcodeInformation<MSP430_Two_Operand_Arithmetic>();
 			
@@ -98,25 +100,29 @@ namespace Decoder
 															 word following the instruction word,
 															 where X = PC - ADDR*/
 				{
-					hasImmediateSource = true;
+					hasSourceAddress = true;
 				}
 				else if (twoOperandArithmetic->as == 1
 					&& twoOperandArithmetic->source == 2) /* Absolute mode &ADDR. SR takes value 0,
 															 and works as ADDR(SR)
 															 ADDR follows instruction word*/
 				{
-					hasImmediateSource = true;
+					hasSourceAddress = true;
 				}
 				else if (twoOperandArithmetic->as == 3
 					&& twoOperandArithmetic->source == 0) /* Immediate mode3 #N
 															 N follows the instruction word*/
 				{
-					hasImmediateSource = true;
+					hasSourceImmediate = true;
 				}
 
-				if (hasImmediateSource)
+				if (hasSourceAddress)
 				{
-					opcode->sourceAddress = *currentProgramCounter;
+					opcode->setSourceAddress(*currentProgramCounter);
+				}
+				else if (hasSourceImmediate)
+				{
+					opcode->setImmediate(*currentProgramCounter);
 				}
 
 				if (twoOperandArithmetic->ad == 1
@@ -126,7 +132,7 @@ namespace Decoder
 				{
 					++currentProgramCounter;
 
-					hasImmediateDestination = true;
+					hasDestinationAddress = true;
 				}
 				else if (twoOperandArithmetic->ad == 1
 					&& twoOperandArithmetic->dst == 2) /*   Absolute mode &ADDR
@@ -134,15 +140,15 @@ namespace Decoder
 				{
 					++currentProgramCounter;
 
-					hasImmediateDestination = true;
+					hasDestinationAddress = true;
 				}
 
-				if (hasImmediateDestination)
+				if (hasDestinationAddress)
 				{
-					opcode->destinationAddress = *currentProgramCounter;
+					opcode->setDestinationAddress(*currentProgramCounter);
 				}
 
-				opcode->operationType = twoOperandArithmetic->size;
+				opcode->setOperationType(twoOperandArithmetic->size);
 				
 			}
 			break;
@@ -150,7 +156,7 @@ namespace Decoder
 
 		length = (currentProgramCounter - currentInstruction);
 
-		opcode->length = length;
+		opcode->setLength() = length;
 
 		return length;
 	}

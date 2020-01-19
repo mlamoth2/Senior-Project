@@ -39,7 +39,7 @@ namespace MSP430_Opcodes
 
 		uint16 address;
 		uint8 length;
-
+		
 
 		union
 		{
@@ -48,6 +48,12 @@ namespace MSP430_Opcodes
 
 			uint8 destinationAddress;
 			uint16 destinationAddress;
+		};
+
+		union
+		{
+			uint8 immediate;
+			uint16 immediate;
 		};
 
 		// could used lambda?
@@ -67,6 +73,67 @@ namespace MSP430_Opcodes
 		{
 			return address;
 		}
+
+		void setLength(uint16 length)
+		{
+			this->length = length;
+		}
+
+		uint16 getLength()
+		{
+			return length;
+		}
+
+		void setInstructionType(char instructionType)
+		{
+			this->instructionType = instructionType;
+		}
+
+		char getInstructionType()
+		{
+			return instructionType;
+		}
+
+		void setOperationType(char operationType)
+		{
+			this->operationType = operationType;
+		}
+
+		char getOperationType()
+		{
+			return operationType;
+		}
+
+		void setSourceAddress(uint16 sourceAddress)
+		{
+			this->sourceAddress = sourceAddress;
+		}
+
+		uint16 getSourceAddress()
+		{
+			return sourceAddress;
+		}
+
+		void setDestinationAddress(uint16 destinationAddress)
+		{
+			this->destinationAddress = destinationAddress;
+		}
+
+		uint16 getdestinationAddress()
+		{
+			return destinationAddress;
+		}
+
+		void setImmediate(uint16 immediate)
+		{
+			this->immediate = immediate;
+		}
+
+		uint16 getImmediate()
+		{
+			return immediate;
+		}
+
 	}MSP430_Opcode;
 
 	typedef struct
