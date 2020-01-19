@@ -76,7 +76,7 @@ namespace MSP430_Opcodes
 
 				if (getFlagHasSourceAddress() || getFlagHasSourceImmediate())
 				{
-					currentLength++;
+					currentLength += sizeof(uint16);
 				}
 
 				setOperationType(twoOperandArithmetic->size);
@@ -113,7 +113,7 @@ namespace MSP430_Opcodes
 
 				if (getFlagHasSourceAddress() || getFlagHasSourceImmediate())
 				{
-					currentLength++;
+					currentLength += sizeof(uint16);
 				}
 
 				if (getFlagHasSourceAddress())
@@ -142,7 +142,7 @@ namespace MSP430_Opcodes
 
 				if (getFlagHasDestinationAddress())
 				{
-					currentLength++;
+					currentLength += sizeof(uint16);
 				}
 
 				setOperationType(twoOperandArithmetic->size);
