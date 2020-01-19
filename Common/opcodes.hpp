@@ -2,10 +2,6 @@
 
 namespace MSP430_Opcodes
 {
-	#define SINGLE_OPERAND_ARITHMETIC 0
-	#define CONDITIONAL 1
-	#define TWO_OPERAND_ARITHMETIC 2
-	#define EMULATED 3
 
 	// define bit fields for the struct
 
@@ -37,8 +33,22 @@ namespace MSP430_Opcodes
 
 	typedef struct
 	{
-		int type : 2;
+		char instructionType : 2; // single operand, conditional, two operand
+
+		char operationType : 1; // word = 0, byte = 1
+
 		uint16 address;
+		uint8 length;
+
+
+		union
+		{
+			uint8 sourceAddress;
+			uint16 sourceAddress;
+
+			uint8 destinationAddress;
+			uint16 destinationAddress;
+		};
 
 		// could used lambda?
 

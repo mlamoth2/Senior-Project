@@ -9,7 +9,7 @@ namespace Decoder
 		MSP430CPUDecoder();
 		~MSP430CPUDecoder();
 
-		MSP430_Opcode* decodeCurrentInstruction(uint16 programCounter);
+		uint8 decodeCurrentInstruction(uint16 programCounter, MSP430_Opcode* opcode);
 
 	private:
 
