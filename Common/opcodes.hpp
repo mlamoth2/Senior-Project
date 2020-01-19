@@ -33,6 +33,10 @@ namespace MSP430_Opcodes
 
 	typedef struct
 	{
+		bool flagHasSourceImmediate;
+		bool flagHasSourceAddress;
+		bool flagHasDestinationAddress;
+
 		char instructionType : 2; // single operand, conditional, two operand
 
 		char operationType : 1; // word = 0, byte = 1
@@ -40,7 +44,6 @@ namespace MSP430_Opcodes
 		uint16 address;
 		uint8 length;
 		
-
 		union
 		{
 			uint8 sourceAddress;
@@ -79,11 +82,11 @@ namespace MSP430_Opcodes
 			this->length = length;
 		}
 
-		uint16 getLength()
+		uint8 getLength()
 		{
 			return length;
 		}
-
+				
 		void setInstructionType(char instructionType)
 		{
 			this->instructionType = instructionType;
@@ -119,7 +122,7 @@ namespace MSP430_Opcodes
 			this->destinationAddress = destinationAddress;
 		}
 
-		uint16 getdestinationAddress()
+		uint16 getDestinationAddress()
 		{
 			return destinationAddress;
 		}
@@ -133,6 +136,48 @@ namespace MSP430_Opcodes
 		{
 			return immediate;
 		}
+
+		void setFlagSourceImmediate(bool flagHasSourceImmediate)
+		{
+			this->flagHasSourceImmediate = flagHasSourceImmediate;
+		}
+
+		bool getFlagHasSourceImmediate()
+		{
+			return flagHasSourceImmediate;
+		}
+
+		void setFlagHasSourceImmediate(bool flagHasSourceImmediate)
+		{
+			this->flagHasSourceImmediate = flagHasSourceImmediate;
+		}
+
+		bool getFlagHasSourceImmediate()
+		{
+			return flagHasSourceImmediate;
+		}
+
+		void setFlagHasSourceAddress(bool flagHasSourceAddress)
+		{
+			this->flagHasSourceAddress = flagHasSourceAddress;
+		}
+
+		bool getFlagHasSourceAddress()
+		{
+			return flagHasSourceAddress;
+		}
+
+		void setFlagHasDestinationAddress(bool flagHasDestinationAddress)
+		{
+			this->flagHasDestinationAddress = flagHasDestinationAddress;
+		}
+
+		bool getFlagHasDestinationAddress()
+		{
+			return flagHasDestinationAddress;
+		}
+
+		void initialize(); // call this in fetch
 
 	}MSP430_Opcode;
 

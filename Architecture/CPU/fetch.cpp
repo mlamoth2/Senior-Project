@@ -2,6 +2,8 @@
 #include "..\..\Common\typedefs.hpp"
 #include "..\..\Common\opcodes.hpp"
 
+using namespace MSP430_Opcodes;
+
 #include "fetch.hpp"
 
 #include <cstring>

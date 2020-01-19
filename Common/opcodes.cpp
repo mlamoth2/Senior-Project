@@ -43,8 +43,113 @@ namespace MSP430_Opcodes
 		{"AND", "", "Logical AND source with destination"},
 	};
 
-	uint16 MSP430_Opcode::getLength()
+	uint8 MSP430_Opcode::initialize()
 	{
-		return length;
+		uint8 currentLength = sizeof(uint16);
+
+		uint16* currentInstruction = getAddress();
+				
+		switch (*currentInstruction >> 13)
+		{
+			case 0: // single operand arithmetic 
+			{				
+				setInstructionType(SINGLE_OPERAND_ARITHMETIC);
+
+				const MSP40_Single_Operand_Arithmetic* singleOperandArithmetic = opcode->getOpcodeInformation<MSP40_Single_Operand_Arithmetic>();
+
+				if (singleOperandArithmetic->as == 1
+					&& singleOperandArithmetic->source == 0)
+				{
+					setFlagHasSourceAddress(true);
+				}
+				else if (singleOperandArithmetic->as == 1
+					&& singleOperandArithmetic->source == 2)
+				{
+					setFlagHasSourceAddress(true);
+				}
+
+				else if (singleOperandArithmetic->as == 3
+					&& singleOperandArithmetic->source == 0)
+				{
+					setFlagHasSourceImmediate(true);
+				}
+
+				if (getFlagHasSourceAddress() || getFlagHasSourceImmediate())
+				{
+					currentLength++;
+				}
+
+				setOperationType(twoOperandArithmetic->size);
+			}
+			break;
+
+			case 1: // conditional
+			{
+				setInstructionType(CONDITIONAL);
+			}
+			break;
+
+			default: // two operand arithmetic
+			{
+				setInstructionType(TWO_OPERAND_ARITHMETIC);
+
+				const MSP430_Two_Operand_Arithmetic* twoOperandArithmetic = opcode->getOpcodeInformation<MSP430_Two_Operand_Arithmetic>();
+			
+				if (twoOperandArithmetic->as == 1
+					&& twoOperandArithmetic->source == 0)
+				{
+					setFlagHasSourceAddress(true);
+				}
+				else if (twoOperandArithmetic->as == 1
+					&& twoOperandArithmetic->source == 2)
+				{
+					setFlagHasSourceAddress(true);
+				}
+				else if (twoOperandArithmetic->as == 3
+					&& twoOperandArithmetic->source == 0)
+				{
+					setFlagHasSourceImmediate(true);
+				}
+
+				if (getFlagHasSourceAddress() || getFlagHasSourceImmediate())
+				{
+					currentLength++;
+				}
+
+				if (getFlagHasSourceAddress())
+				{
+					opcode->setSourceAddress(*currentProgramCounter);
+				}
+				else if (getFlagHasSourceImmediate())
+				{
+					opcode->setImmediate(*currentProgramCounter);
+				}
+
+				if (twoOperandArithmetic->ad == 1
+					&& twoOperandArithmetic->dst == 0)
+				{
+					++currentProgramCounter;
+
+					setFlaghasDestinationAddress(true);
+				}
+				else if (twoOperandArithmetic->ad == 1
+					&& twoOperandArithmetic->dst == 2)
+				{
+					++currentProgramCounter;
+
+					setFlaghasDestinationAddress(true);
+				}
+
+				if (getFlagHasDestinationAddress())
+				{
+					currentLength++;
+				}
+
+				setOperationType(twoOperandArithmetic->size);
+			}
+			break;
+		}
+
+		setLength(currentLength);
 	}
 }
