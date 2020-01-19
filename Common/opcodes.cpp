@@ -47,7 +47,7 @@ namespace MSP430_Opcodes
 	{
 		uint8 currentLength = sizeof(uint16);
 
-		uint16* currentInstruction = getAddress();
+		uint16* currentInstruction = (uint16*)getAddress();
 				
 		switch (*currentInstruction >> 13)
 		{

@@ -46,17 +46,17 @@ namespace MSP430_Opcodes
 		
 		union
 		{
-			uint8 sourceAddress;
-			uint16 sourceAddress;
+			uint8 sourceAddress8;
+			uint16 sourceAddress16;
 
-			uint8 destinationAddress;
-			uint16 destinationAddress;
+			uint8 destinationAddress8;
+			uint16 destinationAddress16;
 		};
 
 		union
 		{
-			uint8 immediate;
-			uint16 immediate;
+			uint8 immediate8;
+			uint16 immediate16;
 		};
 
 		// could used lambda?
@@ -109,42 +109,37 @@ namespace MSP430_Opcodes
 
 		void setSourceAddress(uint16 sourceAddress)
 		{
-			this->sourceAddress = sourceAddress;
+			this->sourceAddress16 = sourceAddress;
 		}
 
 		uint16 getSourceAddress()
 		{
-			return sourceAddress;
+			return sourceAddress16;
 		}
 
 		void setDestinationAddress(uint16 destinationAddress)
 		{
-			this->destinationAddress = destinationAddress;
+			this->destinationAddress16 = destinationAddress;
 		}
 
 		uint16 getDestinationAddress()
 		{
-			return destinationAddress;
+			return destinationAddress16;
 		}
 
 		void setImmediate(uint16 immediate)
 		{
-			this->immediate = immediate;
+			this->immediate16 = immediate;
 		}
 
 		uint16 getImmediate()
 		{
-			return immediate;
+			return immediate16;
 		}
 
 		void setFlagSourceImmediate(bool flagHasSourceImmediate)
 		{
 			this->flagHasSourceImmediate = flagHasSourceImmediate;
-		}
-
-		bool getFlagHasSourceImmediate()
-		{
-			return flagHasSourceImmediate;
 		}
 
 		void setFlagHasSourceImmediate(bool flagHasSourceImmediate)
