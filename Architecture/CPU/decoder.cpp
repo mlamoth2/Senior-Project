@@ -1,4 +1,4 @@
-#include "..\..\Common\defines.hpp"
+﻿#include "..\..\Common\defines.hpp"
 #include "..\..\Common\typedefs.hpp"
 #include "..\..\Common\operand.hpp"
 #include "..\..\Common\opcodes.hpp"
@@ -6,6 +6,29 @@
 using namespace MSP430_Opcodes; // this has to be above the include below, otherwise compile error
 
 #include "decoder.hpp"
+
+/*
+http://www.ece.utep.edu/courses/web3376/Links_files/MSP430%20Quick%20Reference.pdf
+
+As Ad d/s Register Syntax Description
+00 0 ds n ≠ 3 Rn Register direct. The operand is the contents of Rn. Ad=0
+01 1 ds n ≠ 0, 2, 3 x(Rn) Indexed. The operand is in memory at address Rn+x.
+10 - s n ≠ 0, 2, 3 @Rn Register indirect. The operand is in memory at the address held in Rn.
+11 - s n ≠ 0, 2, 3 @Rn+ Indirect auto-increment. As above, then the register is incremented by 1 or 2.
+Addressing modes using R0 (PC)
+01 1 ds 0 (PC) LABEL Symbolic. x(PC) The operand is in memory at address PC+x.
+11 - s 0 (PC) #x Immediate. @PC+ The operand is the next word in the instruction stream.
+Addressing modes using R2 (SR) and R3 (CG), special-case decoding
+01 1 ds 2 (SR) &LABEL Absolute. The operand is in memory at address x.
+10 - s 2 (SR) #4 Constant. The operand is the constant 4.
+11 - s 2 (SR) #8 Constant. The operand is the constant 8.
+00 - s 3 (CG) #0 Constant. The operand is the constant 0.
+01 - s 3 (CG) #1 Constant. The operand is the constant 1. There is no index word.
+10 - s 3 (CG) #2 Constant. The operand is the constant 2.
+11 - s 3 (CG) #−1 Constant. The operand is the constant −1.
+
+https://cnx.org/contents/6YtMW_PQ@3.1:__auotnt@1/Addressing-modes
+*/
 
 namespace Decoder
 {
@@ -47,8 +70,6 @@ namespace Decoder
 			case TWO_OPERAND_ARITHMETIC:
 			{
 				const MSP430_Two_Operand_Arithmetic* twoOperandArithmetic = opcode->getOpcodeInformation<MSP430_Two_Operand_Arithmetic>();
-			
-				
 			}
 			break;
 		}
