@@ -87,6 +87,15 @@
     <ClCompile Include="CPU\registers.cpp">
       <Filter>Source Files\CPU\Registers</Filter>
     </ClCompile>
+    <ClCompile Include="CPU\l1.cpp">
+      <Filter>Source Files\CPU\Cache</Filter>
+    </ClCompile>
+    <ClCompile Include="CPU\l2.cpp">
+      <Filter>Source Files\CPU\Cache</Filter>
+    </ClCompile>
+    <ClCompile Include="cache.cpp">
+      <Filter>Source Files\CPU\Cache</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CPU\fetch.hpp">
@@ -106,6 +115,15 @@
     </ClInclude>
     <ClInclude Include="CPU\registers.hpp">
       <Filter>Header Files\CPU\Registers</Filter>
+    </ClInclude>
+    <ClInclude Include="CPU\l2.hpp">
+      <Filter>Header Files\CPU\Cache</Filter>
+    </ClInclude>
+    <ClInclude Include="CPU\l1.hpp">
+      <Filter>Header Files\CPU\Cache</Filter>
+    </ClInclude>
+    <ClInclude Include="cache.hpp">
+      <Filter>Header Files\CPU\Cache</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

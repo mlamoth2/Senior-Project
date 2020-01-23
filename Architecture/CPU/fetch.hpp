@@ -28,7 +28,7 @@ namespace Fetcher
 			advanceProgramCounter(opcode->getLength());
 		}
 
-		void advanceProgramCounter(uint8 delta)
+		void advanceProgramCounter(int8 delta)
 		{
 			programCounter += delta;
 		}

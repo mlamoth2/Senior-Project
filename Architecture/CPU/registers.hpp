@@ -8,5 +8,9 @@ namespace Registers
 
 		MSP430CPURegisters();
 		~MSP430CPURegisters();
+
+	private:
+
+
 	};
 }

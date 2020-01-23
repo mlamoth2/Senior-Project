@@ -9,3 +9,10 @@
 
 #define WORD_OPERATION 0
 #define BYTE_OPERATION 1
+
+#define REGISTER_PC 0
+#define REGISTER_SP 1
+#define REGISTER_SR 2
+#define REGISTER_CONST 3
+
+

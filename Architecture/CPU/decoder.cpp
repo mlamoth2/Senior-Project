@@ -30,12 +30,16 @@ namespace Decoder
 			case SINGLE_OPERAND_ARITHMETIC:
 			{
 				const MSP40_Single_Operand_Arithmetic* singleOperandArithmetic = opcode->getOpcodeInformation<MSP40_Single_Operand_Arithmetic>();
+			
+				
 			}
 			break;
 
 			case CONDITIONAL:
 			{
 				const MSP430_Conditional* conditional = opcode->getOpcodeInformation<MSP430_Conditional>();
+			
+				
 			}
 			break;
 
