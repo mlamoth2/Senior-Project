@@ -1,6 +1,9 @@
 #include "defines.hpp"
 #include "typedefs.hpp"
+#include "operands.hpp"
 #include "opcodes.hpp"
+
+using namespace MSP430_Operands;
 
 namespace MSP430_Opcodes
 {

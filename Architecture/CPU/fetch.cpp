@@ -1,5 +1,6 @@
 #include "..\..\Common\defines.hpp"
 #include "..\..\Common\typedefs.hpp"
+#include "..\..\Common\operand.hpp"
 #include "..\..\Common\opcodes.hpp"
 
 using namespace MSP430_Opcodes;

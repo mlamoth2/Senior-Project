@@ -174,6 +174,9 @@ namespace MSP430_Opcodes
 
 		void initialize(); // call this in fetch
 
+		MSP430_Operands::MSP430_Operand source;
+		MSP430_Operands::MSP430_Operand destination;
+
 	}MSP430_Opcode;
 
 	typedef struct

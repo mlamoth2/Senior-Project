@@ -1,4 +1,5 @@
 #include "..\..\Common\typedefs.hpp"
+#include "..\..\Common\operand.hpp"
 #include "..\..\Common\opcodes.hpp"
 
 #include "execute.hpp"

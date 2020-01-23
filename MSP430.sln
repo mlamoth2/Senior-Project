@@ -22,12 +22,14 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source Files", "Source Files", "{88DAFFF9-E045-4AF8-B786-E06483D648C7}"
 	ProjectSection(SolutionItems) = preProject
 		Common\opcodes.cpp = Common\opcodes.cpp
+		Common\operand.cpp = Common\operand.cpp
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Header Files", "Header Files", "{4D99582A-F228-468D-8DBB-9CAC5E1BF8B8}"
 	ProjectSection(SolutionItems) = preProject
 		Common\defines.hpp = Common\defines.hpp
 		Common\opcodes.hpp = Common\opcodes.hpp
+		Common\operand.hpp = Common\operand.hpp
 		Common\typedefs.hpp = Common\typedefs.hpp
 	EndProjectSection
 EndProject
