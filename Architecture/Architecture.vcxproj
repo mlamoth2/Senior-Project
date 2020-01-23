@@ -19,25 +19,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cache.cpp" />
+    <ClCompile Include="CPU\cache.cpp" />
     <ClCompile Include="CPU\instructions.cpp" />
     <ClCompile Include="CPU\branchpredictor.cpp" />
     <ClCompile Include="CPU\decoder.cpp" />
     <ClCompile Include="CPU\execute.cpp" />
     <ClCompile Include="CPU\fetch.cpp" />
-    <ClCompile Include="CPU\l1.cpp" />
-    <ClCompile Include="CPU\l2.cpp" />
     <ClCompile Include="CPU\registers.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="cache.hpp" />
+    <ClInclude Include="CPU\cache.hpp" />
     <ClInclude Include="CPU\instructions.hpp" />
     <ClInclude Include="CPU\branchpredictor.hpp" />
     <ClInclude Include="CPU\decoder.hpp" />
     <ClInclude Include="CPU\execute.hpp" />
     <ClInclude Include="CPU\fetch.hpp" />
-    <ClInclude Include="CPU\l1.hpp" />
-    <ClInclude Include="CPU\l2.hpp" />
     <ClInclude Include="CPU\registers.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -67,6 +67,12 @@
     <Filter Include="Header Files\CPU\Registers">
       <UniqueIdentifier>{e5514703-38f3-4016-b614-39be7894f40e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\CPU\Memory">
+      <UniqueIdentifier>{69f790b3-6e98-431b-9077-72b47d214759}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CPU\Memory">
+      <UniqueIdentifier>{e1acd113-e1da-49d3-b20e-9f96d8bb0da3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CPU\branchpredictor.cpp">
@@ -87,13 +93,7 @@
     <ClCompile Include="CPU\registers.cpp">
       <Filter>Source Files\CPU\Registers</Filter>
     </ClCompile>
-    <ClCompile Include="CPU\l1.cpp">
-      <Filter>Source Files\CPU\Cache</Filter>
-    </ClCompile>
-    <ClCompile Include="CPU\l2.cpp">
-      <Filter>Source Files\CPU\Cache</Filter>
-    </ClCompile>
-    <ClCompile Include="cache.cpp">
+    <ClCompile Include="CPU\cache.cpp">
       <Filter>Source Files\CPU\Cache</Filter>
     </ClCompile>
   </ItemGroup>
@@ -116,13 +116,7 @@
     <ClInclude Include="CPU\registers.hpp">
       <Filter>Header Files\CPU\Registers</Filter>
     </ClInclude>
-    <ClInclude Include="CPU\l2.hpp">
-      <Filter>Header Files\CPU\Cache</Filter>
-    </ClInclude>
-    <ClInclude Include="CPU\l1.hpp">
-      <Filter>Header Files\CPU\Cache</Filter>
-    </ClInclude>
-    <ClInclude Include="cache.hpp">
+    <ClInclude Include="CPU\cache.hpp">
       <Filter>Header Files\CPU\Cache</Filter>
     </ClInclude>
   </ItemGroup>

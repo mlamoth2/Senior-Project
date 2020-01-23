@@ -28,6 +28,8 @@ Addressing modes using R2 (SR) and R3 (CG), special-case decoding
 11 - s 3 (CG) #−1 Constant. The operand is the constant −1.
 
 https://cnx.org/contents/6YtMW_PQ@3.1:__auotnt@1/Addressing-modes
+
+http://mspgcc.sourceforge.net/manual/x147.html
 */
 
 namespace Decoder

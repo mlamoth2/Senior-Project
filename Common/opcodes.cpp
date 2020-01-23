@@ -119,15 +119,6 @@ namespace MSP430_Opcodes
 					currentLength += sizeof(uint16);
 				}
 
-				if (getFlagHasSourceAddress())
-				{
-					opcode->setSourceAddress(*currentProgramCounter);
-				}
-				else if (getFlagHasSourceImmediate())
-				{
-					opcode->setImmediate(*currentProgramCounter);
-				}
-
 				if (twoOperandArithmetic->ad == 1
 					&& twoOperandArithmetic->dst == 0)
 				{
