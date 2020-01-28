@@ -37,6 +37,10 @@ namespace Cache
 		int16** LRU; // least recently used
 
 		int16* vcLRU;
+
+		MSP430Block** cache; // the actual cache
+
+		MSP430Block* vcCache; // victim cache
 	}MSP430CacheData;
 			
 	class MSP430Cache
@@ -46,11 +50,7 @@ namespace Cache
 		MSP430Cache(int16 blockSize, int16 cacheSize, int16 cacheAssociativity, int16 vcSize, int8 additionalCacheFlags);
 		~MSP430Cache();
 
-	private:
-					
-		MSP430Block** cache; // the actual cache
-
-		MSP430Block* vcCache; // victim cache	
+	private:	
 					
 		void initCache();
 		void Request(const char *c, uint16 address);
@@ -64,7 +64,6 @@ namespace Cache
 		void writeVC(uint16 address, int16 dirtyBit);
 		uint16 getvcLRU();
 		int16 searchVC(uint16 address);
-		void printVC();
 
 		MSP430CacheData* cacheData; // 0 L1 cache, 1 L2 cache, 2 L3 cache
 	}; 
