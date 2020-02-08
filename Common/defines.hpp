@@ -15,6 +15,11 @@
 #define REGISTER_SR 2
 #define REGISTER_CONST 3
 
-#define USE_L2 (1<<0)
-#define USE_L3 (1<<1)
+#define USE_L1 (1<<0)
+#define USE_L2 (1<<1)
+#define USE_L3 (1<<2)
 #define USE_L2_AND_L3 USE_L2 | USE_L3
+
+#define L1 0
+#define L2 1
+#define L3 2

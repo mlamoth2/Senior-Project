@@ -2,7 +2,6 @@
 
 namespace Instructions
 {
-	
 	MSP430CPUInstructions::MSP430CPUInstructions()
 	{
 	}
@@ -10,5 +9,4 @@ namespace Instructions
 	MSP430CPUInstructions::~MSP430CPUInstructions()
 	{
 	}
-
 }

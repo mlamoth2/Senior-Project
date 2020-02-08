@@ -4,39 +4,39 @@ namespace Cache
 {
 	typedef struct
 	{
-		int16 validBit;
-		int16 dirtyBit;
-		uint16 tag;
-		uint16 index;     
+		int validBit;
+		int dirtyBit;
+		unsigned int tag;
+		unsigned int index;     
 	}MSP430Block;
 
 	typedef struct
 	{
-		int16 blockSize;
-		int16 cacheSize;
-		int16 cacheAssoc;
-		int16 vcSize;
+		int blockSize;
+		int cacheSize;
+		int cacheAssoc;
+		int vcSize;
 	
-		int16 numSets;
-		int16 numWays;
-		uint16 offsetBits;
-		uint16 indexBits;
-		uint16 tagBits;
-		uint16 address;
-		uint16 index;
-		uint16 tag;
+		int numSets;
+		int numWays;
+		unsigned int offsetBits;
+		unsigned int indexBits;
+		unsigned int tagBits;
+		unsigned int address;
+		unsigned int index;
+		unsigned int tag;
 
-		uint16 vcTagBits;
-		uint16 vcIndexBits;
-		uint16 vcOffsetBits;
-		uint16 vcTag;
-		uint16 vcIndex; 
+		unsigned int vcTagBits;
+		unsigned int vcIndexBits;
+		unsigned int vcOffsetBits;
+		unsigned int vcTag;
+		unsigned int vcIndex; 
 
-		int16 accessCount;
+		int accessCount;
 
-		int16** LRU; // least recently used
+		int** LRU; // least recently used
 
-		int16* vcLRU;
+		int* vcLRU;
 
 		MSP430Block** cache; // the actual cache
 
@@ -47,24 +47,24 @@ namespace Cache
 	{
 	public:
 
-		MSP430Cache(int16 blockSize, int16 cacheSize, int16 cacheAssociativity, int16 vcSize, int8 additionalCacheFlags);
+		MSP430Cache(int blockSize, int cacheSize, int cacheAssociativity, int vcSize);
 		~MSP430Cache();
 
 	private:	
 					
 		void initCache();
-		void Request(const char *c, uint16 address);
+		void Request(const char *c, unsigned int address);
 		void initLRU();
-		void updateLRU(uint16 index, int16 way);
-		uint16 getLRU(uint16 index);
+		void updateLRU(unsigned int index, int way);
+		unsigned int getLRU(unsigned int index) const;
 
 		void initVC();
 		void initvcLRU();
-		void updatevcLRU(int16 way);
-		void writeVC(uint16 address, int16 dirtyBit);
-		uint16 getvcLRU();
-		int16 searchVC(uint16 address);
+		void updatevcLRU(int way);
+		void writeVC(unsigned int address, int dirtyBit);
+		unsigned int getvcLRU() const;
+		int searchVC(unsigned int address);
 
-		MSP430CacheData* cacheData; // 0 L1 cache, 1 L2 cache, 2 L3 cache
+		MSP430CacheData cacheData;
 	}; 
 };
