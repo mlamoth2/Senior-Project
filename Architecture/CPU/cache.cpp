@@ -115,7 +115,7 @@ namespace Cache
 
 		foundValue = cacheData.LRU[index][way];
 
-		for(int wayIterator = way; wayIterator > 0; --wayIterator)
+		for (int wayIterator = way; wayIterator > 0; --wayIterator)
 		{
 			cacheData.LRU[index][wayIterator] = cacheData.LRU[index][wayIterator-1]; 
 		}
@@ -134,9 +134,9 @@ namespace Cache
 
 		cacheData.vcTag = address >> cacheData.vcOffsetBits;
 
-		for(int sizeIterator = 0; sizeIterator < cacheData.vcSize; ++sizeIterator)
+		for (int sizeIterator = 0; sizeIterator < cacheData.vcSize; ++sizeIterator)
 		{
-			if((cacheData.vcCache[sizeIterator].tag == cacheData.vcTag) && (cacheData.vcCache[sizeIterator].validBit == 1))
+			if ((cacheData.vcCache[sizeIterator].tag == cacheData.vcTag) && (cacheData.vcCache[sizeIterator].validBit == 1))
 			{
 				returnValue = sizeIterator;
 
@@ -208,9 +208,7 @@ namespace Cache
 
 		cacheData.vcTag = address >> cacheData.vcOffsetBits;
 
-		// Check for invalid block
-
-		for(int sizeIterator = 0; sizeIterator < cacheData.vcSize; ++sizeIterator)
+		for (int sizeIterator = 0; sizeIterator < cacheData.vcSize; ++sizeIterator)
 		{
 			if (cacheData.vcCache[sizeIterator].validBit == 0)
 			{
@@ -237,7 +235,7 @@ namespace Cache
 		{
 			vclruBlock = getvcLRU();
 
-			if(cacheData.vcCache[vclruBlock].dirtyBit == 1)
+			if (cacheData.vcCache[vclruBlock].dirtyBit == 1)
 			{
 				unsigned int wbAddress;
 
@@ -250,7 +248,7 @@ namespace Cache
 
 				updatevcLRU(vclruBlock);
 			}
-			else if(cacheData.vcCache[vclruBlock].dirtyBit == 0)
+			else if (cacheData.vcCache[vclruBlock].dirtyBit == 0)
 			{
 				cacheData.vcCache[vclruBlock].tag = cacheData.vcTag;
 				cacheData.vcCache[vclruBlock].validBit = 1;
@@ -259,12 +257,308 @@ namespace Cache
 
 				updatevcLRU(vclruBlock);
 			}
-
 		}
-	
 	}
-	void MSP430Cache::Request(const char *c, unsigned int address)  
+	void MSP430Cache::Request(unsigned int accessType, unsigned int address, unsigned int cacheLevel)   // modify return address, recursively search cache levels
 	{
+		unsigned int mask = 4294967295;
+		unsigned int a; 	
+	
+		int foundWay;
+		bool invalidBlock = false;
+		bool hit = false;
+		unsigned int lruBlock;
+
+		int vcFound;
+		unsigned int swapTemp;
+		unsigned int swapAddressL1;
+		int swapL1dirtyBit;
+		int vcHitWay;
+		unsigned int evictAddress;
+
+		cacheData.accessCount++;
+
+		if (accessType & CACHE_READ)
+		{
+			a = address >> cacheData.offsetBits;
+			mask = 4294967295;
+			mask = mask >> (cacheData.tagBits + cacheData.offsetBits);
+
+			if (cacheData.cacheAssoc < (cacheData.cacheSize/cacheData.blockSize))
+			{
+				cacheData.index = (address >> cacheData.offsetBits) & mask;
+			}
+			else if (cacheData.cacheAssoc >= (cacheData.cacheSize/cacheData.blockSize))
+			{
+				cacheData.index = 0;
+			}
+
+			cacheData.tag = (address >> cacheData.offsetBits) >> cacheData.indexBits;
+
+			for (int wayIterator = 0; wayIterator < cacheData.numWays; ++wayIterator)
+			{
+				if ((cacheData.cache[cacheData.index][wayIterator].validBit == 1) &&
+					(cacheData.cache[cacheData.index][wayIterator].tag == cacheData.tag))   
+				{
+					hit = true; 
+					foundWay = wayIterator;	
+					break;
+				}
+				else
+				{
+					hit = false;
+				}
+			}
+			if (hit == true)    
+			{	
+				updateLRU(cacheData.index, foundWay);
+			}
+			else
+			{
+				for (int wayIterator = 0; wayIterator < cacheData.numWays; ++wayIterator)
+				{
+					if ((cacheData.cache[cacheData.index][wayIterator].validBit == 0))
+					{
+						invalidBlock = true;
+						foundWay = wayIterator;
+						break;
+					}
+					else
+					{
+						invalidBlock = false;
+					}	
+				}
+				if (invalidBlock == true)
+				{
+//					Request(CACHE_READ, address, L2);
+//					read in from L2
+				
+					cacheData.cache[cacheData.index][foundWay].tag = cacheData.tag;
+					cacheData.cache[cacheData.index][foundWay].validBit = 1;
+					cacheData.cache[cacheData.index][foundWay].dirtyBit = 0;
+					cacheData.cache[cacheData.index][foundWay].index = cacheData.index;
+
+					updateLRU(cacheData.index, foundWay);
+				} 
+				else
+				{
+					lruBlock = getLRU(cacheData.index);
+
+					if (cacheData.vcSize != 0)
+					{		
+						vcHitWay = searchVC(address);
+
+						if (vcHitWay != -1)
+						{
+							swapAddressL1 = (cacheData.cache[cacheData.index][lruBlock].tag << (cacheData.indexBits + cacheData.offsetBits)) + (cacheData.cache[cacheData.index][lruBlock].index << cacheData.offsetBits);
+
+							swapTemp = swapAddressL1;
+							swapL1dirtyBit = cacheData.cache[cacheData.index][lruBlock].dirtyBit;
+
+							cacheData.cache[cacheData.index][lruBlock].dirtyBit = cacheData.vcCache[vcHitWay].dirtyBit;
+							cacheData.cache[cacheData.index][lruBlock].tag = ((cacheData.vcCache[vcHitWay].tag) << cacheData.vcOffsetBits) >> (cacheData.offsetBits + cacheData.indexBits);
+							cacheData.cache[cacheData.index][lruBlock].validBit = 1;
+							cacheData.cache[cacheData.index][lruBlock].index = cacheData.index;
+
+							cacheData.vcCache[vcHitWay].tag = swapAddressL1 >> (cacheData.vcOffsetBits);
+							cacheData.vcCache[vcHitWay].dirtyBit = swapL1dirtyBit;
+							cacheData.vcCache[vcHitWay].validBit = 1;
+							cacheData.vcCache[vcHitWay].index = 0;
+
+							updateLRU(cacheData.index, lruBlock);
+							updatevcLRU(vcHitWay);
+						}
+						else if (vcHitWay == -1)
+						{
+							evictAddress = (cacheData.cache[cacheData.index][lruBlock].tag << (cacheData.indexBits + cacheData.offsetBits)) + (cacheData.cache[cacheData.index][lruBlock].index << cacheData.offsetBits); 
+
+							writeVC(evictAddress, cacheData.cache[cacheData.index][lruBlock].dirtyBit);
+
+//							Request(CACHE_READ, address, L2);
+			
+							cacheData.cache[cacheData.index][lruBlock].tag = cacheData.tag;
+							cacheData.cache[cacheData.index][lruBlock].validBit = 1; 
+							cacheData.cache[cacheData.index][lruBlock].dirtyBit = 0;
+							cacheData.cache[cacheData.index][lruBlock].index = cacheData.index;
+	
+							updateLRU(cacheData.index, lruBlock);
+						}
+					}	
+					else if( cacheData.vcSize == 0 )				
+					{
+						if ((cacheData.cache[cacheData.index][lruBlock].dirtyBit == 1))
+						{
+							int wbAddress;
+							wbAddress = (cacheData.cache[cacheData.index][lruBlock].tag << (cacheData.offsetBits + cacheData.indexBits)) + (cacheData.cache[cacheData.index][lruBlock].index << cacheData.offsetBits); 
+			                   
+//							Request(CACHE_WRITE, wbAddress, L2);
+							
+//			 				Request(CACHE_READ, address, L2);					
+
+							cacheData.cache[cacheData.index][lruBlock].tag = cacheData.tag;
+							cacheData.cache[cacheData.index][lruBlock].validBit = 1; 
+							cacheData.cache[cacheData.index][lruBlock].dirtyBit = 0;
+							cacheData.cache[cacheData.index][lruBlock].index = cacheData.index;
+	
+							updateLRU(cacheData.index, lruBlock);
+						}
+						else if ((cacheData.cache[cacheData.index][lruBlock].dirtyBit == 0)) 
+						{
+//							Request(CACHE_READ, address, L2);
+
+							cacheData.cache[cacheData.index][lruBlock].tag = cacheData.tag;
+							cacheData.cache[cacheData.index][lruBlock].validBit = 1; 
+							cacheData.cache[cacheData.index][lruBlock].dirtyBit = 0;
+							cacheData.cache[cacheData.index][lruBlock].index = cacheData.index;
+
+							updateLRU(cacheData.index, lruBlock);
+						}
+					}
+				}
+			}	
+		}
+		else if (accessType & CACHE_WRITE)
+		{
+			mask = 4294967295;
+			mask = mask >> (cacheData.tagBits + cacheData.offsetBits);
+
+			if (cacheData.cacheAssoc < (cacheData.cacheSize/cacheData.blockSize))
+			{
+				cacheData.index = (address >> cacheData.offsetBits) & mask;
+			}
+			else if (cacheData.cacheAssoc >= (cacheData.cacheSize/cacheData.blockSize))
+			{
+				cacheData.index = 0;
+			}
+
+			cacheData.tag = (address >> cacheData.offsetBits) >> cacheData.indexBits;		
 		
+			for (int waysIterator = 0; waysIterator < cacheData.numWays; ++waysIterator)
+			{
+				if ((cacheData.cache[cacheData.index][waysIterator].validBit == 1) && (cacheData.cache[cacheData.index][waysIterator].tag == cacheData.tag))   //Condition for Hit
+				{	
+					hit = true;
+					foundWay = waysIterator;
+					break;
+				}	
+				else
+				{
+					hit = false;
+				}
+			}
+			if (hit == true)
+			{
+				cacheData.cache[cacheData.index][foundWay].tag = cacheData.tag;
+				cacheData.cache[cacheData.index][foundWay].validBit = 1; 
+				cacheData.cache[cacheData.index][foundWay].dirtyBit = 1;
+				cacheData.cache[cacheData.index][foundWay].index = cacheData.index;
+
+				updateLRU(cacheData.index, foundWay);
+			}
+			else 
+			{
+				for (int waysIterator = 0; waysIterator < cacheData.numWays; ++waysIterator)
+				{
+					if((cacheData.cache[cacheData.index][waysIterator].validBit == 0))
+					{	
+						invalidBlock = true;
+						foundWay = waysIterator;
+						break;
+					}
+					else
+					{
+						invalidBlock = false;
+					}
+				}		
+				if (invalidBlock == true)
+				{
+//					Request(CACHE_READ, address, L2);	
+	
+					cacheData.cache[cacheData.index][foundWay].tag = cacheData.tag;
+					cacheData.cache[cacheData.index][foundWay].validBit = 1;		
+					cacheData.cache[cacheData.index][foundWay].dirtyBit = 1;
+					cacheData.cache[cacheData.index][foundWay].index = cacheData.index;	
+
+					updateLRU(cacheData.index, foundWay);
+				} 
+				else
+				{
+					lruBlock = getLRU(cacheData.index);
+
+					if (cacheData.vcSize != 0)
+					{
+						vcHitWay = searchVC(address);
+
+						if (vcHitWay != -1)  
+						{
+							swapAddressL1 = (cacheData.cache[cacheData.index][lruBlock].tag << (cacheData.indexBits + cacheData.offsetBits)) + (cacheData.cache[cacheData.index][lruBlock].index << (cacheData.offsetBits));
+
+							swapTemp = swapAddressL1;
+							swapL1dirtyBit = cacheData.cache[cacheData.index][lruBlock].dirtyBit;
+
+							cacheData.cache[cacheData.index][lruBlock].dirtyBit = 1;
+							cacheData.cache[cacheData.index][lruBlock].tag = cacheData.tag;
+							cacheData.cache[cacheData.index][lruBlock].validBit = 1;
+							cacheData.cache[cacheData.index][lruBlock].index = cacheData.index;
+
+							cacheData.vcCache[vcHitWay].tag = swapAddressL1 >> (cacheData.vcOffsetBits);
+							cacheData.vcCache[vcHitWay].dirtyBit = swapL1dirtyBit;
+							cacheData.vcCache[vcHitWay].validBit = 1;
+							cacheData.vcCache[vcHitWay].index = 0;
+
+							updateLRU(cacheData.index, lruBlock);
+							updatevcLRU(vcHitWay);
+						}
+						else
+						{
+				
+							evictAddress = (cacheData.cache[cacheData.index][lruBlock].tag << (cacheData.indexBits + cacheData.offsetBits)) + (cacheData.cache[cacheData.index][lruBlock].index << (cacheData.offsetBits));
+							writeVC(evictAddress, cacheData.cache[cacheData.index][lruBlock].dirtyBit);
+
+//							Request(CACHE_READ, address, L2);
+			
+							cacheData.cache[cacheData.index][lruBlock].tag = cacheData.tag;
+							cacheData.cache[cacheData.index][lruBlock].validBit = 1; 
+							cacheData.cache[cacheData.index][lruBlock].dirtyBit = 1;
+							cacheData.cache[cacheData.index][lruBlock].index = cacheData.index;
+	
+							updateLRU(cacheData.index, lruBlock);
+
+						}
+					}	
+					else if (cacheData.vcSize == 0)
+					{
+						if ((cacheData.cache[cacheData.index][lruBlock].dirtyBit == 1))
+						{
+							int wbAddress;
+							wbAddress = (cacheData.cache[cacheData.index][lruBlock].tag << (cacheData.offsetBits + cacheData.indexBits)) + (cacheData.cache[cacheData.index][lruBlock].index << cacheData.offsetBits); 
+
+//							Request(CACHE_WRITE, wbAddress, L2);	
+
+//							Request(CACHE_READ, address, L2);
+			
+							cacheData.cache[cacheData.index][lruBlock].tag = cacheData.tag;
+							cacheData.cache[cacheData.index][lruBlock].validBit = 1; 
+							cacheData.cache[cacheData.index][lruBlock].dirtyBit = 1;
+							cacheData.cache[cacheData.index][lruBlock].index = cacheData.index;
+
+							updateLRU(cacheData.index, lruBlock);
+						}
+						else if ((cacheData.cache[cacheData.index][lruBlock].dirtyBit == 0)) 
+						{
+
+//							Request(CACHE_READ, address, L2);
+
+							cacheData.cache[cacheData.index][lruBlock].tag = cacheData.tag;
+							cacheData.cache[cacheData.index][lruBlock].validBit = 1; 
+							cacheData.cache[cacheData.index][lruBlock].dirtyBit = 1;
+							cacheData.cache[cacheData.index][lruBlock].index = cacheData.index;
+
+							updateLRU(cacheData.index, lruBlock);
+						}
+					}
+				}
+			}
+		}
 	}
 }

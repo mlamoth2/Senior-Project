@@ -23,3 +23,6 @@
 #define L1 0
 #define L2 1
 #define L3 2
+
+#define CACHE_READ (1<<0)
+#define CACHE_WRITE (1<<1)

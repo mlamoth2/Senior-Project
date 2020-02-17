@@ -57,7 +57,7 @@ namespace Decoder
 			{
 				const MSP40_Single_Operand_Arithmetic* singleOperandArithmetic = opcode->getOpcodeInformation<MSP40_Single_Operand_Arithmetic>();
 			
-				
+				if (singleOperandArithmetic->)
 			}
 			break;
 

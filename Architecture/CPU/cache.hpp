@@ -50,10 +50,19 @@ namespace Cache
 		MSP430Cache(int blockSize, int cacheSize, int cacheAssociativity, int vcSize);
 		~MSP430Cache();
 
+		int getCacheLevel()
+		{
+			return cacheLevel;
+		}
+		void setCacheLevel(int level)
+		{
+			cacheLevel = level;
+		}
+
 	private:	
 					
 		void initCache();
-		void Request(const char *c, unsigned int address);
+		void Request(unsigned int accessType, unsigned int address, unsigned int cacheLevel);
 		void initLRU();
 		void updateLRU(unsigned int index, int way);
 		unsigned int getLRU(unsigned int index) const;
@@ -64,6 +73,8 @@ namespace Cache
 		void writeVC(unsigned int address, int dirtyBit);
 		unsigned int getvcLRU() const;
 		int searchVC(unsigned int address);
+
+		int cacheLevel;
 
 		MSP430CacheData cacheData;
 	}; 
