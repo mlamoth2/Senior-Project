@@ -66,7 +66,7 @@ namespace Decoder
 			{
 				const MSP40_Single_Operand_Arithmetic* singleOperandArithmetic = opcode->getOpcodeInformation<MSP40_Single_Operand_Arithmetic>();
 			
-				switch (singleOperandArithmetic->as)
+				switch(singleOperandArithmetic->as)
 				{
 					case 0: // Register direct mode
 					{
@@ -112,7 +112,7 @@ namespace Decoder
 			{
 				const MSP430_Two_Operand_Arithmetic* twoOperandArithmetic = opcode->getOpcodeInformation<MSP430_Two_Operand_Arithmetic>();
 			
-				switch (twoOperandArithmetic->as)
+				switch(twoOperandArithmetic->as)
 				{
 					case 0: // Register direct mode
 					{
@@ -136,6 +136,22 @@ namespace Decoder
 
 					}
 					break;
+				}
+
+				switch(twoOperandArithmetic->ad)
+				{
+					case 0:
+					{
+
+					}
+					break;
+
+					case 1:
+					{
+				
+					}
+					break;
+				}
 			}
 			break;
 		}
