@@ -6,9 +6,11 @@
 using namespace MSP430_Opcodes; // this has to be above the include below, otherwise compile error
 using namespace MSP430_Operands;
 
+#include "cache.hpp"
 #include "decoder.hpp"
 #include "registers.hpp"
 
+using namespace Cache;
 using namespace Registers;
 
 /*
