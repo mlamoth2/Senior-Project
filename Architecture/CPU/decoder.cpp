@@ -68,6 +68,52 @@ namespace Decoder
 				{
 					case 0: // Register direct mode
 					{
+						// no cache needed, just register
+					}
+					break;
+
+					case 1: // Indexed mode
+					{
+
+					}
+					break;
+
+					case 2: // Indirect register mode
+					{
+
+					}
+					break;
+
+					case 3: // Auto increment
+					{
+						if(singleOperandArithmetic->dst == PC)
+						{
+
+						}
+					}
+					break;
+				}
+
+				
+			}
+			break;
+
+			case CONDITIONAL:
+			{
+				const MSP430_Conditional* conditional = opcode->getOpcodeInformation<MSP430_Conditional>();
+			
+				
+			}
+			break;
+
+			case TWO_OPERAND_ARITHMETIC:
+			{
+				const MSP430_Two_Operand_Arithmetic* twoOperandArithmetic = opcode->getOpcodeInformation<MSP430_Two_Operand_Arithmetic>();
+			
+				switch (twoOperandArithmetic->as)
+				{
+					case 0: // Register direct mode
+					{
 						
 					}
 					break;
@@ -88,23 +134,6 @@ namespace Decoder
 
 					}
 					break;
-				}
-
-				
-			}
-			break;
-
-			case CONDITIONAL:
-			{
-				const MSP430_Conditional* conditional = opcode->getOpcodeInformation<MSP430_Conditional>();
-			
-				
-			}
-			break;
-
-			case TWO_OPERAND_ARITHMETIC:
-			{
-				const MSP430_Two_Operand_Arithmetic* twoOperandArithmetic = opcode->getOpcodeInformation<MSP430_Two_Operand_Arithmetic>();
 			}
 			break;
 		}
