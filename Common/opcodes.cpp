@@ -89,23 +89,20 @@ namespace MSP430_Opcodes
 			
 				if(twoOperandArithmetic->as == 1)
 				{
-					if(twoOperandArithmetic->as == 1)
+					if(twoOperandArithmetic->source == SR)  // # absolute
 					{
-						if(twoOperandArithmetic->source == SR)  // # absolute
-						{
-							length += sizeof(uint16);
+						length += sizeof(uint16);
 
-							setFlagHasSourceImmediate(true);
-						}
-						else // # relative
-						{
-							length += sizeof(uint16);
+						setFlagHasSourceImmediate(true);
+					}
+					else // # relative
+					{
+						length += sizeof(uint16);
 
-							setFlagHasSourceImmediate(true);
-						}
+						setFlagHasSourceImmediate(true);
 					}
 				}
-				else if(twoOperandArithmetic->as == 3)
+				else if(twoOperandArithmetic->as == 3) // # immediate
 				{
 					if(twoOperandArithmetic->source == PC)
 					{
