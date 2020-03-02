@@ -4,14 +4,11 @@ namespace MSP430_Operands
 {
 	typedef struct
 	{
-		union
-		{
-			uint8 sourceAddress8;
-			uint16 sourceAddress16;
-
-			uint8 destinationAddress8;
-			uint16 destinationAddress16;
-		};
+		template <class T>
+		T sourceAddress;
+		
+		template <class T>
+		T destinationAddress;
 
 		union
 		{
@@ -19,24 +16,30 @@ namespace MSP430_Operands
 			uint16 immediate16;
 		};
 
-		void setSourceAddress(uint16 sourceAddress)
+		uint8 size;
+
+		template <class T>
+		void setSourceAddress(T sourceAddress)
 		{
-			this->sourceAddress16 = sourceAddress;
+			this->sourceAddress = sourceAddress;
 		}
 
-		uint16 getSourceAddress()
+		template <class T>
+		T getSourceAddress()
 		{
-			return sourceAddress16;
+			return sourceAddress;
 		}
 
-		void setDestinationAddress(uint16 destinationAddress)
+		template <class T>
+		void setDestinationAddress(T destinationAddress)
 		{
-			this->destinationAddress16 = destinationAddress;
+			this->destinationAddress = destinationAddress;
 		}
 
-		uint16 getDestinationAddress()
+		template <class T>
+		T getDestinationAddress()
 		{
-			return destinationAddress16;
+			return destinationAddress;
 		}
 
 		void setImmediate(uint16 immediate)
@@ -48,5 +51,16 @@ namespace MSP430_Operands
 		{
 			return immediate16;
 		}
+
+		uint8 getSize()
+		{
+			return size;
+		}
+
+		void setSize(uint8 size)
+		{
+			this->size = size;
+		}
+
 	}MSP430_Operand;
 }

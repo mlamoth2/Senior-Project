@@ -18,9 +18,9 @@ namespace BranchPredictor
 
 		void incrementState()
 		{
-			if (state < STRONGLY_TAKEN)
+			if (state != STRONGLY_TAKEN)
 			{
-				state++;
+				state--;
 			}
 
 		}
@@ -29,7 +29,7 @@ namespace BranchPredictor
 		{
 			if (state != STRONGLY_NOT_TAKEN)
 			{
-				state--;
+				state++;
 			}
 		}
 

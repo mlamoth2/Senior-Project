@@ -48,9 +48,10 @@ namespace MSP430_Opcodes
 
 	uint8 MSP430_Opcode::initialize()
 	{
-		uint8 currentLength = sizeof(uint16);
+		unsigned int* currentInstruction = (unsigned int*)getAddress();
+		unsigned int* start = (unsigned int*)getAddress();
 
-		uint16* currentInstruction = (uint16*)getAddress();
+		uint8 length = sizeof(uint16);
 				
 		switch (*currentInstruction >> 13)
 		{
@@ -60,29 +61,17 @@ namespace MSP430_Opcodes
 
 				const MSP40_Single_Operand_Arithmetic* singleOperandArithmetic = opcode->getOpcodeInformation<MSP40_Single_Operand_Arithmetic>();
 
-				if (singleOperandArithmetic->as == 1
-					&& singleOperandArithmetic->source == 0)
+				if(singleOperandArithmetic->as == 3)
 				{
-					setFlagHasSourceAddress(true);
-				}
-				else if (singleOperandArithmetic->as == 1
-					&& singleOperandArithmetic->source == 2)
-				{
-					setFlagHasSourceAddress(true);
-				}
+					if(singleOperandArithmetic->dst == PC)
+					{
+						length += sizeof(uint16);
 
-				else if (singleOperandArithmetic->as == 3
-					&& singleOperandArithmetic->source == 0)
-				{
-					setFlagHasSourceImmediate(true);
+						setFlagHasSourceImmediate(true);
+					}
 				}
-
-				if (getFlagHasSourceAddress() || getFlagHasSourceImmediate())
-				{
-					currentLength += sizeof(uint16);
-				}
-
-				setOperationType(twoOperandArithmetic->size);
+				
+				setOperationType(singleOperandArithmetic->size);
 			}
 			break;
 
@@ -98,52 +87,56 @@ namespace MSP430_Opcodes
 
 				const MSP430_Two_Operand_Arithmetic* twoOperandArithmetic = opcode->getOpcodeInformation<MSP430_Two_Operand_Arithmetic>();
 			
-				if (twoOperandArithmetic->as == 1
-					&& twoOperandArithmetic->source == 0)
+				if(twoOperandArithmetic->as == 1)
 				{
-					setFlagHasSourceAddress(true);
+					if(twoOperandArithmetic->as == 1)
+					{
+						if(twoOperandArithmetic->source == SR)  // # absolute
+						{
+							length += sizeof(uint16);
+
+							setFlagHasSourceImmediate(true);
+						}
+						else // # relative
+						{
+							length += sizeof(uint16);
+
+							setFlagHasSourceImmediate(true);
+						}
+					}
 				}
-				else if (twoOperandArithmetic->as == 1
-					&& twoOperandArithmetic->source == 2)
+				else if(twoOperandArithmetic->as == 3)
 				{
-					setFlagHasSourceAddress(true);
-				}
-				else if (twoOperandArithmetic->as == 3
-					&& twoOperandArithmetic->source == 0)
-				{
-					setFlagHasSourceImmediate(true);
+					if(twoOperandArithmetic->source == PC)
+					{
+						length += sizeof(uint16);
+
+						setFlagHasSourceImmediate(true);
+					}
 				}
 
-				if (getFlagHasSourceAddress() || getFlagHasSourceImmediate())
+				if(twoOperandArithmetic->ad == 1)
 				{
-					currentLength += sizeof(uint16);
-				}
+					if(twoOperandArithmetic->dst == SR) // # absolute
+					{
+						length += sizeof(uint16);
 
-				if (twoOperandArithmetic->ad == 1
-					&& twoOperandArithmetic->dst == 0)
-				{
-					++currentProgramCounter;
+						setFlagHasDestinationAddress(true);
+					}
+					else // # relative
+					{
+						length += sizeof(uint16);
 
-					setFlaghasDestinationAddress(true);
+						setFlagHasDestinationAddress(true);
+					}
 				}
-				else if (twoOperandArithmetic->ad == 1
-					&& twoOperandArithmetic->dst == 2)
-				{
-					++currentProgramCounter;
-
-					setFlaghasDestinationAddress(true);
-				}
-
-				if (getFlagHasDestinationAddress())
-				{
-					currentLength += sizeof(uint16);
-				}
+				
 
 				setOperationType(twoOperandArithmetic->size);
 			}
 			break;
 		}
 
-		setLength(currentLength);
+		setLength(currentProgramCounter - start);
 	}
 }

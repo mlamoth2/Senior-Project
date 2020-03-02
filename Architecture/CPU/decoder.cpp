@@ -4,8 +4,12 @@
 #include "..\..\Common\opcodes.hpp"
 
 using namespace MSP430_Opcodes; // this has to be above the include below, otherwise compile error
+using namespace MSP430_Operands;
 
 #include "decoder.hpp"
+#include "registers.hpp"
+
+using namespace Registers;
 
 /*
 http://www.ece.utep.edu/courses/web3376/Links_files/MSP430%20Quick%20Reference.pdf
@@ -49,15 +53,44 @@ namespace Decoder
 		If the instruction is direct, nothing is done during this clock pulse. If this is an I/O instruction or a register instruction, the operation is performed during the clock pulse.
 	*/
 	
-	void MSP430CPUDecoder::decodeCurrentInstruction(MSP430_Opcode* opcode)
+	void MSP430CPUDecoder::decodeCurrentInstruction(MSP430_Opcode* opcode, MSP430_Operand* operands)
 	{
 		switch (opcode->getInstructionType())
 		{
+			// todo: once L2 and L3 are done, we can query to see if the address was cached, so
+			// it behaves more like a traditional cpu decoder
+
 			case SINGLE_OPERAND_ARITHMETIC:
 			{
 				const MSP40_Single_Operand_Arithmetic* singleOperandArithmetic = opcode->getOpcodeInformation<MSP40_Single_Operand_Arithmetic>();
 			
-				if (singleOperandArithmetic->)
+				switch (singleOperandArithmetic->as)
+				{
+					case 0: // Register direct mode
+					{
+						
+					}
+					break;
+
+					case 1: // Indexed mode
+					{
+					}
+					break;
+
+					case 2: // Indirect register mode
+					{
+
+					}
+					break;
+
+					case 3: // Auto increment
+					{
+
+					}
+					break;
+				}
+
+				
 			}
 			break;
 

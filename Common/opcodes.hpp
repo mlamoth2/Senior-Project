@@ -11,7 +11,7 @@ namespace MSP430_Opcodes
 		char opcode : 3;
 		char size : 1;  // Byte or word operation: 0: word operation 1: byte operation
 		char as : 2; // The addressing bits responsible for the addressing mode used for the source (src)
-		char source : 4; // The source operand defined by As and S-reg
+		char dst : 4; // The destination operand defined by As and S-reg
 	}MSP40_Single_Operand_Arithmetic;
 
 	typedef struct
@@ -57,7 +57,7 @@ namespace MSP430_Opcodes
 			this->address = address;
 		}
 
-		uint16 getAddress()
+		unsigned int getAddress()
 		{
 			return address;
 		}
@@ -128,10 +128,6 @@ namespace MSP430_Opcodes
 		}
 
 		void initialize(); // call this in fetch
-
-		MSP430_Operands::MSP430_Operand source;
-		MSP430_Operands::MSP430_Operand destination;
-
 	}MSP430_Opcode;
 
 	typedef struct
