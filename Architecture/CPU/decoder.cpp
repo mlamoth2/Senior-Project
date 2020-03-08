@@ -66,9 +66,9 @@ namespace Decoder
 
 			case SINGLE_OPERAND:
 			{
-				const MSP40_Single_Operand_Arithmetic* singleOperandArithmetic = opcode->getOpcodeInformation<MSP40_Single_Operand_Arithmetic>();
+				const MSP40_Single_Operand* singleOperand = opcode->getOpcodeInformation<MSP40_Single_Operand>();
 			
-				switch(singleOperandArithmetic->as)
+				switch(singleOperand->as)
 				{
 					case 0: // Register direct mode
 					{
@@ -90,7 +90,7 @@ namespace Decoder
 
 					case 3: // Auto increment
 					{
-						if(singleOperandArithmetic->dst == PC)
+						if(singleOperand->dst == PC)
 						{
 
 						}
@@ -112,9 +112,9 @@ namespace Decoder
 
 			case DOUBLE_OPERAND:
 			{
-				const MSP430_Two_Operand_Arithmetic* twoOperandArithmetic = opcode->getOpcodeInformation<MSP430_Two_Operand_Arithmetic>();
+				const MSP430_Double_Operand* doubleOperand = opcode->getOpcodeInformation<MSP430_Double_Operand>();
 			
-				switch(twoOperandArithmetic->as)
+				switch(doubleOperand->as)
 				{
 					case 0: // Register direct mode
 					{
@@ -140,7 +140,7 @@ namespace Decoder
 					break;
 				}
 
-				switch(twoOperandArithmetic->ad)
+				switch(doubleOperand->ad)
 				{
 					case 0:
 					{

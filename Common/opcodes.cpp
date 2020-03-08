@@ -55,15 +55,25 @@ namespace MSP430_Opcodes
 				
 		switch (*currentInstruction >> 13)
 		{
-			case 0: // single operand arithmetic 
+			case 0: // single operand 
 			{				
+				unsigned int instruction = *currentInstruction;
+
+				unsigned int bitmask = (1<<9) | (1<<8) | (1<<7);
+
+				instruction &= bitmask;
+
+				instruction >>= 7;
+
+				setInstruction(instruction);
+
 				setInstructionType(SINGLE_OPERAND_ARITHMETIC);
 
-				const MSP40_Single_Operand_Arithmetic* singleOperandArithmetic = opcode->getOpcodeInformation<MSP40_Single_Operand_Arithmetic>();
+				const MSP40_Single_Operand* singleOperand = opcode->getOpcodeInformation<MSP40_Single_Operand>();
 
-				if(singleOperandArithmetic->as == 3)
+				if(singleOperand->as == 3)
 				{
-					if(singleOperandArithmetic->dst == PC)
+					if(singleOperand->dst == PC)
 					{
 						length += sizeof(uint16);
 
@@ -71,25 +81,47 @@ namespace MSP430_Opcodes
 					}
 				}
 				
-				setOperationType(singleOperandArithmetic->size);
+				setOperationType(singleOperand->size);
 			}
 			break;
 
 			case 1: // conditional
 			{
+				unsigned int instruction = *currentInstruction;
+
+				unsigned int bitmask = (1<<13) | (1<<12) | (1<<11) | (1<<10);
+
+				instruction &= bitmask;
+
+				instruction >>= 10;
+
+				instruction -= 1;
+
+				setInstruction(instruction);
+
 				setInstructionType(CONDITIONAL);
 			}
 			break;
 
 			default: // two operand arithmetic
 			{
+				unsigned int bitmask = (1<<15) | (1<<14) | (1<<13) | (1<<12);
+
+				instruction &= bitmask;
+
+				instruction >>= 12;
+
+				instruction += 11;
+
+				setInstruction(instruction);
+
 				setInstructionType(TWO_OPERAND_ARITHMETIC);
 
-				const MSP430_Two_Operand_Arithmetic* twoOperandArithmetic = opcode->getOpcodeInformation<MSP430_Two_Operand_Arithmetic>();
+				const MSP430_Double_Operand* doubleOperand = opcode->getOpcodeInformation<MSP430_Double_Operand>();
 			
-				if(twoOperandArithmetic->as == 1)
+				if(doubleOperand->as == 1)
 				{
-					if(twoOperandArithmetic->source == SR)  // # absolute
+					if(doubleOperand->source == SR)  // # absolute
 					{
 						length += sizeof(uint16);
 
@@ -102,9 +134,9 @@ namespace MSP430_Opcodes
 						setFlagHasSourceImmediate(true);
 					}
 				}
-				else if(twoOperandArithmetic->as == 3) // # immediate
+				else if(doubleOperand->as == 3) // # immediate
 				{
-					if(twoOperandArithmetic->source == PC)
+					if(doubleOperand->source == PC)
 					{
 						length += sizeof(uint16);
 
@@ -112,9 +144,9 @@ namespace MSP430_Opcodes
 					}
 				}
 
-				if(twoOperandArithmetic->ad == 1)
+				if(doubleOperand->ad == 1)
 				{
-					if(twoOperandArithmetic->dst == SR) // # absolute
+					if(doubleOperand->dst == SR) // # absolute
 					{
 						length += sizeof(uint16);
 
@@ -129,7 +161,7 @@ namespace MSP430_Opcodes
 				}
 				
 
-				setOperationType(twoOperandArithmetic->size);
+				setOperationType(doubleOperand->size);
 			}
 			break;
 		}

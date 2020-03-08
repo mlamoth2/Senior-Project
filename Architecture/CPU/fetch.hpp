@@ -16,7 +16,7 @@ namespace Fetcher
 
 		/*
 			Fetch Stage: The next instruction is fetched from the memory address that is currently stored in the program counter and stored into the instruction register. 
-			At the end of the fetch operation, the PC points to the next instruction that will be read at the next cycle.
+			At the end of the fetch operation, the PC points to the next instruction that will be read at the next cycle, if we haven't branched first.
 		*/
 
 		void Fetch(MSP430_Opcodes::MSP430_Opcode* opcode)

@@ -12,7 +12,7 @@ namespace MSP430_Opcodes
 		char size : 1;  // Byte or word operation: 0: word operation 1: byte operation
 		char as : 2; // The addressing bits responsible for the addressing mode used for the source (src)
 		char dst : 4; // The destination operand defined by As and S-reg
-	}MSP40_Single_Operand_Arithmetic;
+	}MSP40_Single_Operand;
 
 	typedef struct
 	{
@@ -29,7 +29,7 @@ namespace MSP430_Opcodes
 		char size : 1; // Byte or word operation: 0: word operation 1: byte operation
 		char as : 2; // The addressing bits responsible for the addressing mode used for the source (src)
 		char dst : 4; // The destination operand defined by Ad and D-reg
-	}MSP430_Two_Operand_Arithmetic;
+	}MSP430_Double_Operand;
 
 	typedef struct
 	{
@@ -43,6 +43,7 @@ namespace MSP430_Opcodes
 
 		uint16 address;
 		uint8 length;
+		uint8 instruction;
 		
 		// could used lambda?
 
@@ -125,6 +126,16 @@ namespace MSP430_Opcodes
 		bool getFlagHasDestinationAddress()
 		{
 			return flagHasDestinationAddress;
+		}
+
+		void setInstruction(uint8 instruction)
+		{
+			this->instruction = instruction;
+		}
+
+		uint8 getInstruction()
+		{
+			return this->instruction;
 		}
 
 		void initialize(); // call this in fetch

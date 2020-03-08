@@ -31,40 +31,40 @@ namespace Execute
 
 	}
 
-	void MSP430CPUExecute::executeSingleOperand(MSP430_Opcodes::MSP430_Opcode* opcode, uint16 instruction)
+	void MSP430CPUExecute::executeSingleOperand(MSP430_Opcodes::MSP430_Opcode* opcode)
 	{
 
 	}
 
-	void MSP430CPUExecute::executeDoubleOperand(MSP430_Opcodes::MSP430_Opcode* opcode, uint16 instruction)
-	{
-	
-	}
-
-	void MSP430CPUExecute::executeConditional(MSP430_Opcodes::MSP430_Opcode* opcode, uint16 instruction)
+	void MSP430CPUExecute::executeDoubleOperand(MSP430_Opcodes::MSP430_Opcode* opcode)
 	{
 	
 	}
 
-	void MSP430CPUExecute::executeInstruction(MSP430_Opcodes::MSP430_Opcode* opcode, uint16 instruction)
+	void MSP430CPUExecute::executeConditional(MSP430_Opcodes::MSP430_Opcode* opcode)
+	{
+	
+	}
+
+	void MSP430CPUExecute::executeInstruction(MSP430_Opcodes::MSP430_Opcode* opcode)
 	{
 		switch (opcode->getInstructionType())
 		{
 			case SINGLE_OPERAND:
 			{
-				executeSingleOperand(opcode, instruction);
+				executeSingleOperand(opcode);
 			}
 			break;
 
 			case CONDITIONAL:
 			{
-				executeConditional(opcode, instruction);
+				executeConditional(opcode);
 			}
 			break;
 
 			case DOUBLE_OPERAND:
 			{
-				executeDoubleOperand(opcode, instruction);
+				executeDoubleOperand(opcode);
 			}
 			break;
 
