@@ -64,7 +64,7 @@ namespace Decoder
 			// todo: once L2 and L3 are done, we can query to see if the address was cached, so
 			// it behaves more like a traditional cpu decoder
 
-			case SINGLE_OPERAND_ARITHMETIC:
+			case SINGLE_OPERAND:
 			{
 				const MSP40_Single_Operand_Arithmetic* singleOperandArithmetic = opcode->getOpcodeInformation<MSP40_Single_Operand_Arithmetic>();
 			
@@ -110,7 +110,7 @@ namespace Decoder
 			}
 			break;
 
-			case TWO_OPERAND_ARITHMETIC:
+			case DOUBLE_OPERAND:
 			{
 				const MSP430_Two_Operand_Arithmetic* twoOperandArithmetic = opcode->getOpcodeInformation<MSP430_Two_Operand_Arithmetic>();
 			

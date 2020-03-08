@@ -48,17 +48,32 @@ namespace Execute
 
 	void MSP430CPUExecute::executeInstruction(MSP430_Opcodes::MSP430_Opcode* opcode, uint16 instruction)
 	{
-		if(instruction <= RETI)
+		switch (opcode->getInstructionType())
 		{
-			executeSingleOperand(opcode, instruction);
+			case SINGLE_OPERAND:
+			{
+				executeSingleOperand(opcode, instruction);
+			}
+			break;
+
+			case CONDITIONAL:
+			{
+				executeConditional(opcode, instruction);
+			}
+			break;
+
+			case DOUBLE_OPERAND:
+			{
+				executeDoubleOperand(opcode, instruction);
+			}
+			break;
+
+			default:
+			{
+				// throw exception
+			}
+			break;
 		}
-		else if(instruction > RETI && instruction <= JMP)
-		{
-			executeConditional(opcode, instruction);
-		}
-		else if(instruction > JMP && instruction <= AND)
-		{
-			executeDoubleOperand(opcode, instruction);
-		}
+
 	}
 }

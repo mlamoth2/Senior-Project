@@ -561,4 +561,12 @@ namespace Cache
 			}
 		}
 	}
+
+	MSP430Cache Level1CacheCode(4, 1024, 4, 1024);
+	MSP430Cache Level1CacheData(4, 1024, 4, 1024);
+
+	MSP430Cache Level2CacheCode(4*4, 1024*4, 4, 1024*4);
+	MSP430Cache Level2CacheData(4*4, 1024*4, 4, 1024*4);
+
+	MSP430Cache Level3Cache(4*8, 1024*8, 4, 1024*8);
 }
