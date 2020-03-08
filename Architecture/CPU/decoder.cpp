@@ -40,29 +40,29 @@ https://cnx.org/contents/6YtMW_PQ@3.1:__auotnt@1/Addressing-modes
 http://mspgcc.sourceforge.net/manual/x147.html
 */
 
-namespace Decoder
+namespace Decode
 {
-	MSP430CPUDecoder::MSP430CPUDecoder()
+	MSP430CPUDecode::MSP430CPUDecode()
 	{
 	}
 
-	MSP430CPUDecoder::~MSP430CPUDecoder()
+	MSP430CPUDecode::~MSP430CPUDecode()
 	{
 	}
 
 	/*
-		Decode Stage: During this stage, the encoded instruction present in the instruction register is interpreted by the decoder.
+		Decode Stage: During this stage, the encoded instruction present in the instruction register is interpreted by the Decode.
 		Read the effective address: In the case of a memory instruction (direct or indirect), the execution phase will be during the next clock pulse. 
 		If the instruction has an indirect address, the effective address is read from main memory, and any required data is fetched from main memory to be processed and then placed into data registers (clock pulse: T3). 
 		If the instruction is direct, nothing is done during this clock pulse. If this is an I/O instruction or a register instruction, the operation is performed during the clock pulse.
 	*/
 	
-	void MSP430CPUDecoder::decodeCurrentInstruction(MSP430_Opcode* opcode, MSP430_Operand* operands)
+	void MSP430CPUDecode::decodeCurrentInstruction(MSP430_Opcode* opcode, MSP430_Operand* operands)
 	{
 		switch (opcode->getInstructionType())
 		{
 			// todo: once L2 and L3 are done, we can query to see if the address was cached, so
-			// it behaves more like a traditional cpu decoder
+			// it behaves more like a traditional cpu Decode
 
 			case SINGLE_OPERAND:
 			{
@@ -158,4 +158,6 @@ namespace Decoder
 			break;
 		}
 	}
+
+	MSP430CPUDecode Decode();
 }

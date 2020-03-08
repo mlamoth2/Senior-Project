@@ -1,13 +1,13 @@
 #pragma once
 
-namespace Fetcher
+namespace Fetch
 {
-	class MSP430Fetcher
+	class MSP430Fetch
 	{
 	public:
 
-		MSP430Fetcher(uint16 programCounter);
-		~MSP430Fetcher();
+		MSP430Fetch(uint16 programCounter);
+		~MSP430Fetch();
 				
 		uint16 getProgramCounter()
 		{
@@ -36,4 +36,6 @@ namespace Fetcher
 
 		uint16 programCounter;
 	};
+
+	extern MSP430Fetch fetch;
 }

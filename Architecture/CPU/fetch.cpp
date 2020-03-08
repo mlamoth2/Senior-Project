@@ -16,30 +16,32 @@ using namespace Registers;
 
 using namespace std;
 
-namespace Fetcher
+namespace Fetch
 {
-	MSP430Fetcher::MSP430Fetcher(uint16 programCounter)
+	MSP430Fetch::MSP430Fetch(uint16 programCounter)
 	{
 		this->programCounter = programCounter; // initialize the fetcher
 		cpuRegisters[PC].setContents(programCounter); // initialize the program counter
 	}
 
-	MSP430Fetcher::~MSP430Fetcher()
+	MSP430Fetch::~MSP430Fetch()
 	{
 		
 	}
 
-	void MSP430Fetcher::advanceProgramCounter(int8 delta)
+	void MSP430Fetch::advanceProgramCounter(int8 delta)
 	{
 		programCounter += delta;
 
 		cpuRegisters[PC].setContents(programCounter);
 	}
 
-	void MSP430Fetcher::setProgramCounter(uint16 newProgramCounter)
+	void MSP430Fetch::setProgramCounter(uint16 newProgramCounter)
 	{
 		programCounter = newProgramCounter;
 
 		cpuRegisters[PC].setContents(newProgramCounter);
 	}
+
+	MSP430Fetch fetch(0); // start at 0
 }

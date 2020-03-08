@@ -18,4 +18,6 @@ namespace Execute
 	private:
 
 	};
+
+	extern MSP430CPUExecute execute;
 }

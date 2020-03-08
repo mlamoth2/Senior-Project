@@ -1,9 +1,3 @@
-#include "..\..\Common\typedefs.hpp"
-#include "..\..\Common\operand.hpp"
-#include "..\..\Common\opcodes.hpp"
-
-#include "execute.hpp"
-#include "decoder.hpp"
 #include "..\..\Common\defines.hpp"
 #include "..\..\Common\typedefs.hpp"
 #include "..\..\Common\operand.hpp"
@@ -12,6 +6,8 @@
 using namespace MSP430_Opcodes;
 using namespace MSP430_Operands;
 
+#include "decoder.hpp"
+#include "execute.hpp"
 #include "location.hpp"
 #include "memory.hpp"
 #include "registers.hpp"
@@ -219,4 +215,6 @@ namespace Execute
 		}
 
 	}
+
+	MSP430CPUExecute execute();
 }

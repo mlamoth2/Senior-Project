@@ -1,13 +1,13 @@
 #pragma once
 
-namespace Decoder
+namespace Decode
 {
-	class MSP430CPUDecoder
+	class MSP430CPUDecode
 	{
 	public:
 
-		MSP430CPUDecoder();
-		~MSP430CPUDecoder();
+		MSP430CPUDecode();
+		~MSP430CPUDecode();
 
 		/*
 			Decode Stage: During this stage, the encoded instruction present in the instruction register is interpreted by the decoder.
@@ -16,9 +16,11 @@ namespace Decoder
 			If the instruction is direct, nothing is done during this clock pulse. If this is an I/O instruction or a register instruction, the operation is performed during the clock pulse.
 		*/
 
-		void decodeCurrentInstruction(MSP430_Opcodes::MSP430_Opcode* opcode, MSP430_Operands::MSP430_Operand* operands);
+		void decodeCurrentInstruction(MSP430_Opcodes::MSP430_Opcode* opcode);
 
 	private:
 
 	};
+
+	extern MSP430CPUDecode decode;
 }
