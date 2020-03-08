@@ -21,22 +21,16 @@ namespace Fetcher
 
 		void Fetch(MSP430_Opcode* opcode)
 		{
-			opcode->setAddress(programCounter);
+			opcode->setAddress(getProgramCounter());
 
 			opcode->initialize();
 			
 			advanceProgramCounter(opcode->getLength());
 		}
 
-		void advanceProgramCounter(int8 delta)
-		{
-			programCounter += delta;
-		}
+		void advanceProgramCounter(int8 delta);
 
-		void setProgramCounter(uint16 newProgramCounter)
-		{
-			programCounter = newProgramCounter;
-		}
+		void setProgramCounter(uint16 newProgramCounter);
 
 	private:
 
