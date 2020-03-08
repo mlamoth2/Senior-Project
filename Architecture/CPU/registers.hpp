@@ -28,6 +28,17 @@ namespace Registers
 		{
 			contents |= bitMask;
 		}
+
+		virtual void* getLocation()
+		{
+			return reinterpret_cast<void*>(this);
+		}
+
+		void setLocation(void* location)
+		{
+		
+		}
+
 	private:
 
 		uint16 contents;
