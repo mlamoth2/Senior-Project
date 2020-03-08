@@ -2,17 +2,7 @@
 
 namespace Instructions
 {
-	// interface
-	// this class represents all possible locations, registers, memory and such
-
-	class MSP430Location
-	{
-	public:
-
-		virtual unsigned short GetValue() = 0;
-	};
-
-	class MSP430CPUInstructions : public MSP430Location
+	class MSP430CPUInstructions
 	{
 	public:
 
@@ -20,6 +10,9 @@ namespace Instructions
 		~MSP430CPUInstructions();
 
 		// Single operand
+
+//		template <typename T>
+
 
 		// Conditional
 

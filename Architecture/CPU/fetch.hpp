@@ -19,10 +19,10 @@ namespace Fetcher
 			At the end of the fetch operation, the PC points to the next instruction that will be read at the next cycle.
 		*/
 
-		void Fetch(MSP430_Opcode* opcode)
+		void Fetch(MSP430_Opcodes::MSP430_Opcode* opcode)
 		{
 			opcode->setAddress(getProgramCounter());
-
+			
 			opcode->initialize();
 			
 			advanceProgramCounter(opcode->getLength());

@@ -3,11 +3,13 @@
 #include "..\..\Common\operand.hpp"
 #include "..\..\Common\opcodes.hpp"
 
-using namespace MSP430_Opcodes;
-
 #include "fetch.hpp"
+#include "location.hpp"
 #include "registers.hpp"
 
+using namespace MSP430_Opcodes;
+
+using namespace Location;
 using namespace Registers;
 
 #include <cstring>

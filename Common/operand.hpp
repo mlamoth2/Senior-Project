@@ -4,11 +4,11 @@ namespace MSP430_Operands
 {
 	typedef struct
 	{
-		template <class T>
-		T sourceAddress;
+		// std::any or boost would help
+
+		uint16 sourceAddress;
 		
-		template <class T>
-		T destinationAddress;
+		uint16 destinationAddress;
 
 		union
 		{

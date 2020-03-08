@@ -101,7 +101,7 @@ namespace Cache
 
 	void MSP430Cache::updateLRU(unsigned int index, int way)
 	{
-		int foundValue, way;
+		int foundValue;
 
 		for (int wayIterator = 0; wayIterator < cacheData.numWays; ++wayIterator)
 		{
@@ -204,7 +204,7 @@ namespace Cache
 	{
 		bool vcInvalid = false;
 
-		unsigned int vclruBlock, vcInvalid, vcEmpty;
+		unsigned int vclruBlock, vcEmpty;
 
 		cacheData.vcTag = address >> cacheData.vcOffsetBits;
 

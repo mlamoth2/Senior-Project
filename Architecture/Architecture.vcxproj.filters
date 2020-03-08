@@ -119,5 +119,8 @@
     <ClInclude Include="CPU\cache.hpp">
       <Filter>Header Files\CPU\Cache</Filter>
     </ClInclude>
+    <ClInclude Include="CPU\location.hpp">
+      <Filter>Header Files\CPU\Memory</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

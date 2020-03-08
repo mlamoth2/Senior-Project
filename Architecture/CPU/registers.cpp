@@ -1,6 +1,10 @@
+#include "..\..\Common\defines.hpp"
 #include "..\..\Common\typedefs.hpp"
 
+#include "location.hpp"
 #include "registers.hpp"
+
+using namespace Location;
 
 namespace Registers
 {

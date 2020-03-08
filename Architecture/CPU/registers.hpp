@@ -2,25 +2,23 @@
 
 namespace Registers
 {
-	class MSP430CPURegisters
+	class MSP430CPURegisters : Location::MSP430Location
 	{
 	public:
 
 		MSP430CPURegisters();
 		~MSP430CPURegisters();
 
-		// This routine allows us to seamlessly cast between int8 and int16
-		template <typename T> 
-		T getContents()
-		{
-			return reinterpret_cast<T>(contents);
-		}
-
-		void setContents(int16 newContents)
+		void setContents(uint16 newContents)
 		{
 			contents = newContents;
 		}
 
+		uint16 getContents()
+		{
+			return contents;
+		}
+		
 		void turnOffBits(uint16 bitMask)
 		{
 			contents &= ~bitMask;
@@ -32,7 +30,7 @@ namespace Registers
 		}
 	private:
 
-		int16 contents;
+		uint16 contents;
 	};
 
 /*

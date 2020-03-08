@@ -34,6 +34,7 @@
     <ClInclude Include="CPU\decoder.hpp" />
     <ClInclude Include="CPU\execute.hpp" />
     <ClInclude Include="CPU\fetch.hpp" />
+    <ClInclude Include="CPU\location.hpp" />
     <ClInclude Include="CPU\registers.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

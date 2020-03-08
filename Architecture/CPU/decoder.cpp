@@ -8,9 +8,11 @@ using namespace MSP430_Operands;
 
 #include "cache.hpp"
 #include "decoder.hpp"
+#include "location.hpp"
 #include "registers.hpp"
 
 using namespace Cache;
+using namespace Location;
 using namespace Registers;
 
 /*
