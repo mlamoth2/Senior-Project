@@ -57,5 +57,5 @@ namespace Registers
 	r3 is hardwired to 0. If specified as a source, its value is 0. If specified as a destination, the value is discarded.
 */
 
-	MSP430CPURegisters cpuRegisters[MAX_REGISTERS];
+	extern MSP430CPURegisters cpuRegisters[MAX_REGISTERS];
 }

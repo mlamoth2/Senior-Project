@@ -3,7 +3,7 @@
 #include "..\..\Common\operand.hpp"
 #include "..\..\Common\opcodes.hpp"
 
-using namespace MSP430_Opcodes; // this has to be above the include below, otherwise compile error
+using namespace MSP430_Opcodes;
 using namespace MSP430_Operands;
 
 #include "cache.hpp"

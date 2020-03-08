@@ -40,5 +40,5 @@ namespace Memory
 
 		unsigned int memoryAddress;
 		uint16 contents;
-	}
+	};
 }

@@ -15,4 +15,6 @@ namespace Registers
 	MSP430CPURegisters::~MSP430CPURegisters()
 	{
 	}
+
+	MSP430CPURegisters cpuRegisters[MAX_REGISTERS];
 }
