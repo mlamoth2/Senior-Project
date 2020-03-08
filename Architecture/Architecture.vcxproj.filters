@@ -96,6 +96,9 @@
     <ClCompile Include="CPU\cache.cpp">
       <Filter>Source Files\CPU\Cache</Filter>
     </ClCompile>
+    <ClCompile Include="CPU\pipeline.cpp">
+      <Filter>Source Files\CPU\Pipeline</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CPU\fetch.hpp">
@@ -121,6 +124,12 @@
     </ClInclude>
     <ClInclude Include="CPU\location.hpp">
       <Filter>Header Files\CPU\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="CPU\memory.hpp">
+      <Filter>Header Files\CPU\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="CPU\pipeline.hpp">
+      <Filter>Header Files\CPU\Pipeline</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

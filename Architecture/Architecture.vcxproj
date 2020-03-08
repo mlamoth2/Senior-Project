@@ -25,6 +25,7 @@
     <ClCompile Include="CPU\decoder.cpp" />
     <ClCompile Include="CPU\execute.cpp" />
     <ClCompile Include="CPU\fetch.cpp" />
+    <ClCompile Include="CPU\pipeline.cpp" />
     <ClCompile Include="CPU\registers.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -35,6 +36,8 @@
     <ClInclude Include="CPU\execute.hpp" />
     <ClInclude Include="CPU\fetch.hpp" />
     <ClInclude Include="CPU\location.hpp" />
+    <ClInclude Include="CPU\memory.hpp" />
+    <ClInclude Include="CPU\pipeline.hpp" />
     <ClInclude Include="CPU\registers.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
