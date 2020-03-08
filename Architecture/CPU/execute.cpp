@@ -216,5 +216,5 @@ namespace Execute
 
 	}
 
-	MSP430CPUExecute execute();
+	MSP430CPUExecute execute;
 }

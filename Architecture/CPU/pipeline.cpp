@@ -33,7 +33,8 @@ namespace Pipeline
 			Fetch::fetch.Fetch(&currentOpcode);
 
 			Fetch::fetch.advanceProgramCounter(currentOpcode.getLength()); // could be overriden by execute
-			Decode::decode.
+			Decode::decode.decodeCurrentInstruction(&currentOpcode);
+			Execute::execute.executeInstruction(&currentOpcode);
 		}
 	}
 }

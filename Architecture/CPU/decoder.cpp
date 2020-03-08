@@ -57,7 +57,7 @@ namespace Decode
 		If the instruction is direct, nothing is done during this clock pulse. If this is an I/O instruction or a register instruction, the operation is performed during the clock pulse.
 	*/
 	
-	void MSP430CPUDecode::decodeCurrentInstruction(MSP430_Opcode* opcode, MSP430_Operand* operands)
+	void MSP430CPUDecode::decodeCurrentInstruction(MSP430_Opcode* opcode)
 	{
 		switch (opcode->getInstructionType())
 		{
@@ -159,5 +159,5 @@ namespace Decode
 		}
 	}
 
-	MSP430CPUDecode Decode();
+	MSP430CPUDecode decode;
 }
