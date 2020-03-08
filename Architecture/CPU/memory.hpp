@@ -25,11 +25,10 @@ namespace Memory
 		{
 			contents |= bitMask;
 		}
-
-		
+				
 		virtual void* getLocation()
 		{
-			return reinterpret_cast<void*>(this);
+			return reinterpret_cast<void*>(memoryAddress);
 		}
 
 		void setLocation(void* location)
@@ -40,6 +39,6 @@ namespace Memory
 	private:
 
 		unsigned int memoryAddress;
-
+		uint16 contents;
 	}
 }

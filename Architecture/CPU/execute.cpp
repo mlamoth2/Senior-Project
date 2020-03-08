@@ -5,6 +5,7 @@
 #include "execute.hpp"
 #include "decoder.hpp"
 #include "location.hpp"
+#include "memory.hpp"
 #include "registers.hpp"
 
 using namespace Location;
