@@ -106,7 +106,7 @@ namespace Decode
 			{
 				const MSP430_Conditional* conditional = opcode->getOpcodeInformation<MSP430_Conditional>();
 			
-				
+				// conditionals don't require any special addressing
 			}
 			break;
 

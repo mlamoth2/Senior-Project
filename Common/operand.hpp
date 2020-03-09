@@ -1,5 +1,7 @@
 #pragma once
 
+// this file is deprecated right now, restructure or delete, preferably restructure
+
 namespace MSP430_Operands
 {
 	typedef struct

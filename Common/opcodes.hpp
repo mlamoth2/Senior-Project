@@ -44,6 +44,12 @@ namespace MSP430_Opcodes
 		uint16 address;
 		uint8 length;
 		uint8 instruction;
+
+		uint16 immediateSource;
+		uint16 absoluteSource;
+
+		uint16 immediateDestination;
+		uint16 absoluteDestination;
 		
 		// could used lambda?
 
@@ -136,6 +142,46 @@ namespace MSP430_Opcodes
 		uint8 getInstruction()
 		{
 			return this->instruction;
+		}
+
+		uint16 getImmediateSource()
+		{
+			return immediateSource;
+		}
+
+		void setImmediateSource(uint16 immediate)
+		{
+			this->immediateSource = immediate;
+		}
+
+		uint16 getAbsoluteSource()
+		{
+			return absolute;
+		}
+
+		void setAbsoluteSource(uint16 absolute)
+		{
+			this->absoluteSource = absolute;
+		}
+
+		uint16 getImmediateDestination()
+		{
+			return immediateDestination;
+		}
+
+		void setImmediateDestinatino(uint16 immediate)
+		{
+			this->immediateDestination = immediate;
+		}
+
+		uint16 getAbsoluteDestination()
+		{
+			return absolute;
+		}
+
+		void setAbsoluteDestination(uint16 absolute)
+		{
+			this->absoluteDestination = absolute;
 		}
 
 		void initialize(); // call this in fetch

@@ -2,7 +2,7 @@
 
 namespace Registers
 {
-	class MSP430CPURegisters : Location::MSP430Location
+	class MSP430CPURegisters : public Location::MSP430Location
 	{
 	public:
 

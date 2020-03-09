@@ -385,6 +385,8 @@ namespace Instructions
 	{
 	}
 
+	// these need more meat to set the appropriate bits
+
 	void MSP430CPUInstructions::BIC(Location::MSP430Location* src, Location::MSP430Location* dst)
 	{
 		dst->setContents(src->getContents() & ~dst->getContents());
@@ -404,4 +406,6 @@ namespace Instructions
 	{
 		dst->setContents(src->getContents() & dst->getContents());
 	}
+
+	MSP430CPUInstructions instructions;
 }

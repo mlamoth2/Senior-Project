@@ -46,6 +46,8 @@ namespace MSP430_Opcodes
 		{"AND", "", "Logical AND source with destination"},
 	};
 
+	// todo: restructure and recheck
+
 	uint8 MSP430_Opcode::initialize()
 	{
 		unsigned int* currentInstruction = (unsigned int*)getAddress();
@@ -78,6 +80,10 @@ namespace MSP430_Opcodes
 						length += sizeof(uint16);
 
 						setFlagHasSourceImmediate(true);
+
+						currentProgramCounter++;
+
+						setImmediateDestination(*currentProgramCounter);
 					}
 				}
 				
@@ -100,6 +106,8 @@ namespace MSP430_Opcodes
 				setInstruction(instruction);
 
 				setInstructionType(CONDITIONAL);
+
+
 			}
 			break;
 
@@ -126,12 +134,20 @@ namespace MSP430_Opcodes
 						length += sizeof(uint16);
 
 						setFlagHasSourceImmediate(true);
+
+						currentProgramCounter++;
+
+						setAbsoluteSource(*currentProgramCounter);
 					}
 					else // # relative
 					{
 						length += sizeof(uint16);
 
 						setFlagHasSourceImmediate(true);
+
+						currentProgramCounter++;
+
+						setImmediateSource(*currentProgramCounter);
 					}
 				}
 				else if(doubleOperand->as == 3) // # immediate
@@ -141,6 +157,10 @@ namespace MSP430_Opcodes
 						length += sizeof(uint16);
 
 						setFlagHasSourceImmediate(true);
+
+						currentProgramCounter++;
+
+						setImmediateSource(*currentProgramCounter);
 					}
 				}
 
@@ -151,12 +171,20 @@ namespace MSP430_Opcodes
 						length += sizeof(uint16);
 
 						setFlagHasDestinationAddress(true);
+
+						currentProgramCounter++;
+
+						setAbsoluteDestination(*currentProgramCounter);
 					}
 					else // # relative
 					{
 						length += sizeof(uint16);
 
 						setFlagHasDestinationAddress(true);
+
+						currentProgramCounter++;
+
+						setImmediateDestination(*currentProgramCounter);
 					}
 				}
 				

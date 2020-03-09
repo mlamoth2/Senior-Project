@@ -2,7 +2,7 @@
 
 namespace Instructions
 {
-	class MSP430CPUInstructions : Location::MSP430Location
+	class MSP430CPUInstructions
 	{
 	public:
 
@@ -48,4 +48,6 @@ namespace Instructions
 	private:
 
 	};
+
+	extern MSP430CPUInstructions instructions;
 }
