@@ -30,6 +30,7 @@
 #define MAX_REGISTERS 16
 
 #define PC 0
+#define SP 1
 #define SR 2
 #define CG 3
 
@@ -51,4 +52,17 @@ enum
 	R13,
 	R14,
 	R15
+};
+
+enum
+{
+	CARRY_BIT = 0,
+	ZERO_BIT,
+	NEGATIVE_BIT,
+	GLOBAL_INTERRUPT_ENABLE_BIT,
+	CPU_OFF_BIT,
+	OSSCILATOR_OFF_BIT,
+	SCG0_BIT,
+	SCG1_BIT,
+	OVERFLOW_BIT
 };

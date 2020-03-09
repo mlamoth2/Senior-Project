@@ -29,6 +29,21 @@ namespace Registers
 			contents |= bitMask;
 		}
 
+		void turnOnBit(uint16 bit)
+		{
+			contents |= (1 << bit);
+		}
+
+		void turnOffBit(uint16 bit)
+		{
+			contents &= ~(1 << bit);
+		}
+
+		char getBit(uint16 bit)
+		{
+			return contents & (1 << bit);
+		}
+		
 		virtual void* getLocation()
 		{
 			return reinterpret_cast<void*>(this);

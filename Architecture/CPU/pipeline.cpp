@@ -28,6 +28,8 @@ namespace Pipeline
 	{
 		MSP430_Opcodes::MSP430_Opcode currentOpcode;
 
+		// note PC was pointed to address 0
+
 		while (1) // just loop forever for now
 		{
 			Fetch::fetch.Fetch(&currentOpcode);

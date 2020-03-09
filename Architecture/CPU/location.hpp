@@ -18,5 +18,10 @@ namespace Location
 		virtual void turnOffBits(uint16 bitMask) = 0;
 		virtual void turnOnBits(uint16 bitMask) = 0;
 
+		virtual void turnOffBit(uint16 bit) = 0;
+		virtual void turnOnBit(uint16 bit) = 0;
+
+		virtual char getBit(uint16 bit) = 0;
+
 	};
 }

@@ -99,6 +99,9 @@
     <ClCompile Include="CPU\pipeline.cpp">
       <Filter>Source Files\CPU\Pipeline</Filter>
     </ClCompile>
+    <ClCompile Include="CPU\interrupts.cpp">
+      <Filter>Source Files\CPU\ALU</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CPU\fetch.hpp">
@@ -130,6 +133,9 @@
     </ClInclude>
     <ClInclude Include="CPU\pipeline.hpp">
       <Filter>Header Files\CPU\Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="CPU\interrupts.hpp">
+      <Filter>Header Files\CPU\ALU</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
